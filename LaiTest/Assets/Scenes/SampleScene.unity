@@ -3052,7 +3052,7 @@ MonoBehaviour:
   - {fileID: 1921717879}
   - {fileID: 248777943}
   inventoryPrefab: {fileID: 416545366276080311, guid: c2320ece7a0edcf4eb65ae1f9f405ae1, type: 3}
-  InventoryItems: []
+  itemConfig: {fileID: 11400000, guid: fe6b801c34fb4254585fce9ea17055d5, type: 2}
 --- !u!4 &1966239188
 Transform:
   m_ObjectHideFlags: 0

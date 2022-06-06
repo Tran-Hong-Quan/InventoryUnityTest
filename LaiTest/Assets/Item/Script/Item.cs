@@ -6,11 +6,11 @@ using System;
 [Serializable]
 public class Item
 {
-    public string itemName;
     public ItemType itemType;
     public string itemData;
 }
 
+[Serializable]
 public enum ItemType
 {
     sword=0,
@@ -20,11 +20,13 @@ public enum ItemType
     manaFlask=4,
     bullet=5,
     book=6,
+    food=7,
 }
 
 [Serializable]
 public class ConsumableItem
 {
+    public string name;
     public int amount;
     public int maxAmount;
     public int level;
@@ -44,14 +46,22 @@ public class HealFlask : ConsumableItem
 }
 
 [Serializable]
+public class Food : ConsumableItem
+{
+    public float hungerFill;
+}
+
+[Serializable]
 public class Coin
 {
+    public string name;
     public int amount;
 }
 
 [Serializable]
 public class Weapon
 {
+    public string name;
     public int damage;
     public int level;
     public int denominations;
@@ -73,7 +83,9 @@ public class Gun : Weapon
 [Serializable]
 public class Book
 {
+    public int amount;
+    public string name;
     public string data;
-    public int type;
 }
+
 

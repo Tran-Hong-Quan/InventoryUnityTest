@@ -12,18 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8d60e62ecf56ab48b342e05606acaab, type: 3}
   m_Name: Intem Config
   m_EditorClassIdentifier: 
-  manaRcoveryLevelList:
-  - 0
-  - 10
-  - 15
-  healingLevelList:
-  - 0
-  - 10
-  - 15
-  booksData:
-  - "C\xF3 l\xE0 g\xEC"
-  gunConfigs:
-  - damage: 20
-    level: 1
-    denominations: 20
-    maxBullet: 10
+  manaRcoveryConfigList: []
+  healFlaskConfigList: []
+  foodConfigList: []
+  gunConfigsList:
+  - name: gun
+    damage: 1
+    level: 2
+    denominations: 3
+    bullet: 30
+    maxBullet: 30
+  bookConfigsList:
+  - name: book
+    data: "Xin ch\xE0o th\u1EBF gi\u1EDBi"
+  swordConfigsList: []
