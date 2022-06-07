@@ -14,15 +14,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manaRcoveryConfigList: []
   healFlaskConfigList: []
-  foodConfigList: []
+  foodConfigList:
+  - food:
+      amount: 1
+      maxAmount: 3
+      level: 1
+      denominations: 1
+      hungerFill: 10
+    name: food
+    amount: 1
+    maxAmount: 30
   gunConfigsList:
-  - name: gun
-    damage: 1
-    level: 2
-    denominations: 3
-    bullet: 30
-    maxBullet: 30
+  - gun:
+      durability: 100
+      maxDurability: 100
+      damage: 10
+      level: 1
+      denominations: 13
+      bullet: 10
+      maxBullet: 10
+    name: gun
+    amount: 1
+    maxAmount: 1
   bookConfigsList:
-  - name: book
-    data: "Xin ch\xE0o th\u1EBF gi\u1EDBi"
+  - book:
+      data: "Xin ch\xE0o"
+    name: book
+    amount: 1
+    maxAmount: 2
   swordConfigsList: []

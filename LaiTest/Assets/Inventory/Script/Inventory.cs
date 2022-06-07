@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,8 +11,8 @@ public class Inventory : MonoBehaviour
     public List<Slot> slots;
     [SerializeField] private GameObject inventoryPrefab;
 
-    [HideInInspector] public InventoryItemListData inventoryItemListData;
-    [HideInInspector] public Dictionary<int,GameObject> InventoryItemsList = new Dictionary<int, GameObject>();
+    [HideInInspector] public InventoryItemListData inventoryItemListData=new InventoryItemListData();
+    [HideInInspector] public List<InventoryItem> InventoryItemsList = new List<InventoryItem>();
 
     [SerializeField] private ItemConfig itemConfig;
 
@@ -20,165 +20,225 @@ public class Inventory : MonoBehaviour
     private void Awake()
     {
         instance = this;
+
+        for (int i = 0; i < slots.Count; i++)
+            slots[i].slotId = i;
     }
 
     void Start()
-    {
-        //for(int i = 0; i < slots.Count; i++)
-        //    slots[i].slotId = i;
+    {   
+        for (int i = 0; i < 6; i++)
+        {
+            Item book = new Item(ItemType.Book,"book");
+            AddItemToInventory(itemConfig.GetItemConfig(book));
 
-        //inventoryItemListData = new InventoryItemListData();
-        //for (int i = 0; i < 4; i++)
-        //{
-        //    Item book = new Item();
-        //    book.itemType = ItemType.book;
-        //    book.itemData = JsonUtility.ToJson(itemConfig.GetBookConfig("book"));
-        //    AddItemToInventory(book);
+            Item gun = new Item(ItemType.Gun, "gun");
+            AddItemToInventory(itemConfig.GetItemConfig(gun));
 
-        //    Item gun = new Item();
-        //    gun.itemType = ItemType.gun;
-        //    gun.itemData = JsonUtility.ToJson(itemConfig.GetGunConfig("gun"));
-        //    AddItemToInventory(gun);
-
-        //    Item food = new Item();
-        //    food.itemType = ItemType.food;
-        //    food.itemData = JsonUtility.ToJson(itemConfig.GetFoodConfig("food"));
-        //    AddItemToInventory(food);
-
-        //}
-
-        //SaveInventoryData();
-
-        LoadInventoryData();
-        CleanInventory();
-
+            Item food = new Item(ItemType.Food, "food");
+            itemConfig.GetItemConfig(ref food);
+            food.amount = 3;
+            AddItemToInventory(food);
+        }
     }
-
+    /// <summary>
+    /// Add a item to a unfilled slot, if success, return true, else return false 
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns></returns>
     public bool AddItemToInventory(Item item)
     {
         for (int i = 0; i < slots.Count; i++)
         {
-            if(!slots[i].isFill)
+            if (!slots[i].isFill)
             {
-                slots[i].isFill = true;
-                GameObject tempGameObject = Instantiate(inventoryPrefab);
-                tempGameObject.GetComponent<DragAndDropItem>().canvas = inventoryCanvas;
-                tempGameObject.transform.SetParent(slots[i].transform);
-                tempGameObject.GetComponent<RectTransform>().anchoredPosition3D = Vector3.zero;
-                tempGameObject.GetComponent<DragAndDropItem>().locateSlotId = slots[i].slotId;
-
-                switch(item.itemType)
-                {
-                    case ItemType.book:
-                        Book tempBook=new Book();
-                        tempBook=JsonUtility.FromJson<Book>(item.itemData);
-                        tempGameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Image/{tempBook.name}");
-                        if (tempBook.amount > 1)
-                            tempGameObject.GetComponent<InventoryItem>().AmoutText.text = tempBook.amount.ToString();
-                        else
-                            tempGameObject.GetComponent<InventoryItem>().AmoutText.text = "";
-                        break;
-                    case ItemType.gun:
-                        Gun tempGun = new Gun();
-                        tempGun = JsonUtility.FromJson<Gun>(item.itemData);
-                        tempGameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Image/{tempGun.name}");
-                        tempGameObject.GetComponent<InventoryItem>().AmoutText.text = "";
-                        break;
-                    case ItemType.food:
-                        Food tempFood=new Food();
-                        tempFood = JsonUtility.FromJson<Food>(item.itemData);
-                        tempGameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Image/{tempFood.name}");
-                        if (tempFood.amount > 1)
-                            tempGameObject.GetComponent<InventoryItem>().AmoutText.text = tempFood.amount.ToString();
-                        else
-                            tempGameObject.GetComponent<InventoryItem>().AmoutText.text = "";
-                        break;
-                }    
-
-                InventoryItemsList.Add(i, tempGameObject);
-
-                InventoryItemData itemData = new InventoryItemData();
-                itemData.slotId = i;
-                itemData.item=item;
-
-                inventoryItemListData.inventoryItemListData.Add(itemData);
-
+                item.slotId = i;
+                SpawnItem(item);
                 return true;
-            }    
-        }    
+            }
+        }
 
         return false;
     }
+    /// <summary>
+    /// Add item to a slot, if success, return true, else return false 
+    /// </summary>
+    /// <param name="item"></param>
+    public bool SpawnItem(Item item)
+    {
+        int i = item.slotId;
+        if (!slots[i].isFill)
+        {
+            slots[i].isFill = true;
 
-    public void ResetInventory()
+            InventoryItem tempInventoryItem = Instantiate(inventoryPrefab.GetComponent<InventoryItem>());
+            tempInventoryItem.SetData(inventoryCanvas, item);
+
+            InventoryItemsList.Add(tempInventoryItem);
+            inventoryItemListData.inventoryItemListData.Add(item);
+            return true;
+        }
+        return false;
+    }
+    public void ClearInventory()
     {
         foreach (var item in InventoryItemsList)
-            Destroy(item.Value.gameObject);
+            Destroy(item.gameObject);
         InventoryItemsList.Clear();
         for (int i = 0; i < slots.Count; i++)
         {
-            slots[i].isFull=false;
+            slots[i].isFull = false;
             slots[i].isFill = false;
-        }    
-
-        foreach (var itemInventoryData in inventoryItemListData.inventoryItemListData)
-        {
-            AddItemToInventory(itemInventoryData.item);
         }
     }
-
-    private void CleanInventory()
+    public void CleanInventory()
     {
-        List<InventoryItemData> dataList = inventoryItemListData.inventoryItemListData;
+        List<Item> dataList = inventoryItemListData.inventoryItemListData;
         for (int i = 0; i < dataList.Count; i++)
         {
-            for(int j=i+1;j<dataList.Count;j++)
+            if (dataList[i].maxAmount == 1)
+                i++;
+            for (int j = i + 1; j < dataList.Count; j++)
             {
-                if(dataList[i].item.itemType==dataList[j].item.itemType)
+                if (string.Compare(dataList[i].itemName ,dataList[j].itemName)==0)
                 {
-                    switch(dataList[i].item.itemType)
-                    {
-                        case ItemType.book:
-                            Book tempBook1 = JsonUtility.FromJson<Book>(dataList[i].item.itemData);
-                            Book tempBook2 = JsonUtility.FromJson<Book>(dataList[j].item.itemData);
+                    if(dataList[i].amount+dataList[j].amount<dataList[i].maxAmount)
+                        dataList[i].amount+=dataList[j].amount;
 
-                            if(tempBook1.name==tempBook2.name)
-                            {
-                                tempBook1.amount+=tempBook2.amount;
-                                
-                            }
-                            dataList[i].item.itemData=JsonUtility.ToJson(tempBook1);
-                            dataList.RemoveAt(j);
-                            break;
+                    dataList.RemoveAt(j);
+                    j--; 
+                }
+            }
+        }
+        for (int i = 0; i < slots.Count; i++)
+        {
+            slots[i].isFull = false;
+            slots[i].isFill = false;
+        }
+        foreach (var item in InventoryItemsList)
+            Destroy(item.gameObject);
+        InventoryItemsList.Clear();
 
-                        case ItemType.food:
-                            Food tempFood1 = JsonUtility.FromJson<Food>(dataList[i].item.itemData);
-                            Food tempFood2 = JsonUtility.FromJson<Food>(dataList[j].item.itemData);
+        Item[] tempArray = new Item[inventoryItemListData.inventoryItemListData.Count];
+        inventoryItemListData.inventoryItemListData.CopyTo(tempArray);
+        inventoryItemListData.inventoryItemListData.Clear();
 
-                            if (tempFood1.name == tempFood2.name)
-                            {
-                                tempFood1.amount += tempFood2.amount;
+        for (int i = 0; i < tempArray.Length; i++)
+            AddItemToInventory(tempArray[i]);
 
-                            }
-                            dataList[i].item.itemData = JsonUtility.ToJson(tempFood1);
-                            dataList.RemoveAt(j);
-                            break;
-                    }
-                    //j--;
-                }    
+    }
+    public void ChangeSlot(int oldSlot,int newSlot)
+    {
+        foreach (var item in inventoryItemListData.inventoryItemListData)
+            if(item.slotId==oldSlot)
+            {
+                item.slotId = newSlot;
             }    
-        }   
-        
-        ResetInventory();
+
+    }    
+    public bool CanAddItem(int fromSlot, int toSlot)
+    {
+        Item dropedItem=null, checkingItem=null;
+        foreach(var item in inventoryItemListData.inventoryItemListData)
+        {
+            if(item.slotId==fromSlot)
+                dropedItem = item;
+            if(item.slotId==toSlot)
+                checkingItem= item;
+            if (checkingItem != null && dropedItem != null)
+                break;
+        }
+
+        if (checkingItem.itemType != dropedItem.itemType||
+            checkingItem.itemName!=dropedItem.itemName||
+            checkingItem.amount==checkingItem.maxAmount||
+            checkingItem == null ||
+            dropedItem == null)
+            return false;
+
+        if(checkingItem.amount+dropedItem.amount<=checkingItem.maxAmount)
+        {
+            checkingItem.amount+=dropedItem.amount;
+
+            slots[fromSlot].isFill = false;
+            slots[fromSlot].isFull = false;
+
+            foreach (var item in InventoryItemsList)
+            {
+                if (toSlot == item.locateSlotId)
+                {
+                    item.AmoutText.text = checkingItem.amount.ToString();
+                    break;
+                }
+            }
+            foreach (var item in InventoryItemsList)
+            {
+                if (fromSlot == item.locateSlotId)
+                {
+                    Destroy(item.gameObject);
+                    InventoryItemsList.Remove(item);
+                    break;
+                }
+            }
+
+            inventoryItemListData.inventoryItemListData.Remove(dropedItem);
+
+            return true;
+        } 
+        else
+        {
+            dropedItem.amount -= checkingItem.maxAmount-checkingItem.amount;
+            checkingItem.amount = checkingItem.maxAmount;
+
+            slots[toSlot].isFull = true;
+
+            foreach (var item in InventoryItemsList)
+            {
+                if (toSlot == item.locateSlotId)
+                {
+                    item.AmoutText.text = checkingItem.amount.ToString();
+                }
+                else if(fromSlot == item.locateSlotId)
+                {
+                    item.AmoutText.text=dropedItem.amount.ToString();
+                }    
+            }
+
+            return false;
+        }    
+  
+    }    
+    public void ThrowItem(int slotId)
+    {
+        foreach(var item in inventoryItemListData.inventoryItemListData)
+        {
+            if(slotId==item.slotId)
+            {
+                inventoryItemListData.inventoryItemListData.Remove(item);
+                break;
+            }    
+        }    
+        foreach(var item in InventoryItemsList)
+        {
+            if(slotId==item.locateSlotId)
+            {
+                Destroy(item.gameObject);
+                InventoryItemsList.Remove(item);
+                break;
+            }    
+        }    
+
+        slots[slotId].isFull = false;
+        slots[slotId].isFill = false;
     }    
 
+    #region Data
     private void SaveData(string data, string fileName)
     {
         string dataPath = $"{Application.persistentDataPath}/{fileName}.txt";
 
         File.WriteAllText(dataPath, data);
     }
-
     private string LoadData(string fileName)
     {
         string dataPath = $"{Application.persistentDataPath}/{fileName}.txt";
@@ -188,14 +248,12 @@ public class Inventory : MonoBehaviour
         else
             return "";
     }
-    
-    private void SaveInventoryData()
+    public void SaveInventoryData()
     {
         Debug.Log(JsonUtility.ToJson(inventoryItemListData));
         SaveData(JsonUtility.ToJson(inventoryItemListData), "InventoryData");
     }
-
-    private void LoadInventoryData()
+    public void LoadInventoryData()
     {
         string data = LoadData("InventoryData");
 
@@ -207,7 +265,7 @@ public class Inventory : MonoBehaviour
                 slots[i].isFill = false;
             }
             foreach (var item in InventoryItemsList)
-                Destroy(item.Value.gameObject);
+                Destroy(item.gameObject);
             InventoryItemsList.Clear();
             inventoryItemListData = new InventoryItemListData();
 
@@ -215,7 +273,7 @@ public class Inventory : MonoBehaviour
 
             foreach (var item in tempInventoryItemsListData.inventoryItemListData)
             {
-                AddItemToInventory(item.item);
+                SpawnItem(item);
             }
         }
         else
@@ -223,18 +281,13 @@ public class Inventory : MonoBehaviour
             inventoryItemListData = new InventoryItemListData();
         }
     }
+    #endregion Data
 
 }
 
 [Serializable]
 public class InventoryItemListData
 {
-    public List<InventoryItemData> inventoryItemListData=new List<InventoryItemData>();
+    public List<Item> inventoryItemListData = new List<Item>();
 }
 
-[Serializable]
-public class InventoryItemData
-{
-    public Item item;
-    public int slotId;
-}

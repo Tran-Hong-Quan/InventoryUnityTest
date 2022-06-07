@@ -10,11 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3809578193755514162}
   - component: {fileID: 6759240660694935973}
-  - component: {fileID: 2763493089252833282}
-  - component: {fileID: 6678497799279182429}
   - component: {fileID: 8468748019108831102}
   - component: {fileID: 1015378134213293617}
   - component: {fileID: 94612010298203597}
+  - component: {fileID: 5000518693965673357}
   m_Layer: 5
   m_Name: Item
   m_TagString: Untagged
@@ -51,33 +50,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 416545366276080311}
   m_CullTransparentMesh: 1
---- !u!114 &2763493089252833282
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 416545366276080311}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b38f6e3065e8aa46973771f563bd9c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
-  locateSlotId: 0
---- !u!114 &6678497799279182429
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 416545366276080311}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f45528bd972d014bb0092bb3ccd4c6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AmoutText: {fileID: 983533788646890519}
 --- !u!225 &8468748019108831102
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -164,6 +136,23 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5000518693965673357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 416545366276080311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b38f6e3065e8aa46973771f563bd9c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rectTransform: {fileID: 3809578193755514162}
+  AmoutText: {fileID: 983533788646890519}
+  image: {fileID: 1015378134213293617}
+  canvas: {fileID: 0}
+  locateSlotId: 0
 --- !u!1 &3502001850357770171
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,6 +232,6 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '1
+  m_Text: '
 
 '

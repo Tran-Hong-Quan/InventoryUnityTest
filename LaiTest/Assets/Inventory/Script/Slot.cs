@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -15,20 +15,29 @@ public class Slot : MonoBehaviour,IDropHandler
 
     public void OnDrop(PointerEventData eventData)
     {
-        if(eventData.pointerDrag!=null&&!isFill)
+        if(eventData.pointerDrag != null)
         {
-            eventData.pointerDrag.transform.SetParent(transform);
-            eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition3D = Vector3.zero;
-            isFill = true;
-
-            int lastSlotId = eventData.pointerDrag.GetComponent<DragAndDropItem>().locateSlotId;
-            eventData.pointerDrag.GetComponent<DragAndDropItem>().locateSlotId = slotId;
-            Inventory.instance.slots[lastSlotId].isFill = false;
-            Inventory.instance.slots[lastSlotId].isFull = false;
+            int lastSlotId = eventData.pointerDrag.GetComponent<InventoryItem>().locateSlotId;
+            if (!isFill)
+            {
+                eventData.pointerDrag.transform.SetParent(transform);
+                eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition3D = Vector3.zero;
+                isFill = true;
+                eventData.pointerDrag.GetComponent<InventoryItem>().locateSlotId = slotId;
+                Inventory.instance.ChangeSlot(lastSlotId, slotId);
+                Inventory.instance.slots[lastSlotId].isFill = false;
+                Inventory.instance.slots[lastSlotId].isFull = false;
+            }
+            else if (!isFull)
+            {
+                if(!Inventory.instance.CanAddItem(lastSlotId,slotId))
+                    eventData.pointerDrag.GetComponent<InventoryItem>().ComeBackToSlot();
+            }
+            else
+            {
+                eventData.pointerDrag.GetComponent<InventoryItem>().ComeBackToSlot();
+            }    
         }    
-        else if(isFull)
-        {
-            eventData.pointerDrag.GetComponent<DragAndDropItem>().ComeBackToSlot();
-        }    
+        
     }
 }

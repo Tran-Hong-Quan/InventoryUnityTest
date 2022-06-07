@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System;
 
 [Serializable]
@@ -8,25 +5,47 @@ public class Item
 {
     public ItemType itemType;
     public string itemData;
+    public string itemName;
+    public string itemInformation;
+
+    //For inventory
+    public int slotId;
+    public int amount;
+    public int maxAmount;
+
+    public Item() { }
+
+    public Item(ItemType itemType, string itemData, string itemName, int slotId, int amount)
+    {
+        this.itemType = itemType;
+        this.itemData = itemData;
+        this.itemName = itemName;
+        this.slotId = slotId;
+        this.amount = amount;
+    }
+    public Item(ItemType itemType, string itemName)
+    {
+        this.itemType = itemType;
+        this.itemName = itemName;
+    }
 }
 
 [Serializable]
 public enum ItemType
 {
-    sword=0,
-    gun=1,
-    coin=2,
-    lifeFlask=3,
-    manaFlask=4,
-    bullet=5,
-    book=6,
-    food=7,
+    Sword=0,
+    Gun=1,
+    Coin=2,
+    LifeFlask=3,
+    ManaFlask=4,
+    Bullet=5,
+    Book=6,
+    Food=7,
 }
 
 [Serializable]
 public class ConsumableItem
 {
-    public string name;
     public int amount;
     public int maxAmount;
     public int level;
@@ -54,14 +73,14 @@ public class Food : ConsumableItem
 [Serializable]
 public class Coin
 {
-    public string name;
-    public int amount;
+
 }
 
 [Serializable]
 public class Weapon
 {
-    public string name;
+    public int durability;
+    public int maxDurability;
     public int damage;
     public int level;
     public int denominations;
@@ -83,8 +102,6 @@ public class Gun : Weapon
 [Serializable]
 public class Book
 {
-    public int amount;
-    public string name;
     public string data;
 }
 
