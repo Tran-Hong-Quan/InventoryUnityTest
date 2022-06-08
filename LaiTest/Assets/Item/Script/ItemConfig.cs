@@ -5,18 +5,69 @@ using UnityEngine;
 [CreateAssetMenu(menuName ="ItemConfig",fileName ="Intem Config")]
 public class ItemConfig : ScriptableObject
 {
-    #region Mana
-
+    #region ConfigClass
     [Serializable]
     public class ManaFlaskConfig
     {
         public ManaFlask mana;
         public string name;
-        public int amount;
-        public int maxAmount;
+        public int amount=1;
+        public int maxAmount=10;
     }
+    [Serializable]
+    public class HealFlaskConfig
+    {
+        public HealFlask heal;
+        public string name;
+        public int amount = 1;
+        public int maxAmount = 10;
+    }
+    [Serializable]
+    public class FoodConfig
+    {
+        public Food food;
+        public string name;
+        public int amount = 1;
+        public int maxAmount = 10;
+    }
+    [Serializable]
+    public class GunConfig
+    {
+        public Gun gun;
+        public string name;
+        public int amount = 1;
+        public int maxAmount = 10;
+    }
+    [Serializable]
+    public class BooKConfig
+    {
+        public Book book;
+        public string name;
+        public int amount = 1;
+        public int maxAmount = 10;
+    }
+    [Serializable]
+    public class SwordConfig
+    {
+        public Sword sword;
+        public string name;
+        public int amount = 1;
+        public int maxAmount = 10;
+    }
+    #endregion ConfigClass
+
+    #region List
     public List<ManaFlaskConfig> manaRcoveryConfigList;
-  
+    public List<HealFlaskConfig> healFlaskConfigList;
+    public List<FoodConfig> foodConfigList;
+    public List<GunConfig> gunConfigList;
+    public List<BooKConfig> bookConfigList;
+    public List<SwordConfig> swordConfigList;
+    #endregion
+
+    #region GetConfig
+
+    #region Mana
     public ManaFlask GetManaFlaskConfig(string name)
     { 
         for (int i=0;i<manaRcoveryConfigList.Count;i++)
@@ -43,15 +94,6 @@ public class ItemConfig : ScriptableObject
 
     #region HP
 
-    [Serializable]
-    public class HealFlaskConfig
-    {
-        public HealFlask heal;
-        public string name;
-        public int amount;
-        public int maxAmount;
-    }
-    public List<HealFlaskConfig> healFlaskConfigList; 
     public HealFlask GetHPFlaskConfig(string name)
     {
         for (int i = 0; i < healFlaskConfigList.Count; i++)
@@ -78,16 +120,7 @@ public class ItemConfig : ScriptableObject
     #endregion
 
     #region Food
-
-    public List<FoodConfig> foodConfigList;
-    [Serializable]
-    public class FoodConfig
-    {
-        public Food food;
-        public string name;
-        public int amount;
-        public int maxAmount;
-    }    
+ 
     public Food GetFoodConfig(string name)
     {
         for (int i = 0; i < foodConfigList.Count; i++)
@@ -115,32 +148,23 @@ public class ItemConfig : ScriptableObject
 
     #region Gun
 
-    public List<GunConfig> gunConfigsList;
-    [Serializable]
-    public class GunConfig
-    {
-        public Gun gun;
-        public string name;
-        public int amount;
-        public int maxAmount;
-    }
     public Gun GetGunConfig(string name)
     {
-        for (int i = 0; i < gunConfigsList.Count; i++)
-            if (name == gunConfigsList[i].name)
-                return gunConfigsList[i].gun;
+        for (int i = 0; i < gunConfigList.Count; i++)
+            if (name == gunConfigList[i].name)
+                return gunConfigList[i].gun;
         return null;
     }
 
     public Item GetGunItemConfig(string name)
     {
-        for (int i = 0; i < gunConfigsList.Count; i++)
-            if (name == gunConfigsList[i].name)
+        for (int i = 0; i < gunConfigList.Count; i++)
+            if (name == gunConfigList[i].name)
             {
                 Item item=new Item();
-                item.amount = gunConfigsList[i].amount;
-                item.maxAmount = gunConfigsList[i].maxAmount;
-                item.itemData = JsonUtility.ToJson(gunConfigsList[i].gun);
+                item.amount = gunConfigList[i].amount;
+                item.maxAmount = gunConfigList[i].maxAmount;
+                item.itemData = JsonUtility.ToJson(gunConfigList[i].gun);
                 item.itemName = name;
                 return item;
             }    
@@ -151,70 +175,49 @@ public class ItemConfig : ScriptableObject
 
     #region Book
 
-    [Serializable]
-    public class BooKConfig
-    {
-        public Book book;
-        public string name;
-        public int amount;
-        public int maxAmount;
-    }
-    public List<BooKConfig> bookConfigsList;
-
     public Book GetBookConfig(string name)
     {
-        for (int i = 0; i < bookConfigsList.Count; i++)
-            if (name == bookConfigsList[i].name)
-                return bookConfigsList[i].book;
+        for (int i = 0; i < bookConfigList.Count; i++)
+            if (name == bookConfigList[i].name)
+                return bookConfigList[i].book;
         return null;
     }
     public Item GetBookItemConfig(string name)
     {
-        for (int i = 0; i < bookConfigsList.Count; i++)
-            if (name == bookConfigsList[i].name)
+        for (int i = 0; i < bookConfigList.Count; i++)
+            if (name == bookConfigList[i].name)
             {
                 Item item = new Item();
-                item.amount = bookConfigsList[i].amount;
-                item.maxAmount = bookConfigsList[i].maxAmount;
-                item.itemData = JsonUtility.ToJson(bookConfigsList[i].book);
+                item.amount = bookConfigList[i].amount;
+                item.maxAmount = bookConfigList[i].maxAmount;
+                item.itemData = JsonUtility.ToJson(bookConfigList[i].book);
                 item.itemName = name;
                 return item;
             }
         return null;
     }
-
 
     #endregion
 
     #region Sword
 
-    [Serializable]
-    public class SwordConfig
-    {
-        public Sword sword;
-        public string name;
-        public int amount;
-        public int maxAmount;
-    }
-    public List<SwordConfig> swordConfigsList;
-
     public Sword GetSwordConfig(string name)
     {
-        for (int i = 0; i < swordConfigsList.Count; i++)
-            if (name == swordConfigsList[i].name)
-                return swordConfigsList[i].sword;
+        for (int i = 0; i < swordConfigList.Count; i++)
+            if (name == swordConfigList[i].name)
+                return swordConfigList[i].sword;
         return null;
     }
 
     public Item GetSwordItemConfig(string name)
     {
-        for (int i = 0; i < swordConfigsList.Count; i++)
-            if (name == swordConfigsList[i].name)
+        for (int i = 0; i < swordConfigList.Count; i++)
+            if (name == swordConfigList[i].name)
             {
                 Item item = new Item();
-                item.amount = swordConfigsList[i].amount;
-                item.maxAmount = swordConfigsList[i].maxAmount;
-                item.itemData = JsonUtility.ToJson(swordConfigsList[i].sword);
+                item.amount = swordConfigList[i].amount;
+                item.maxAmount = swordConfigList[i].maxAmount;
+                item.itemData = JsonUtility.ToJson(swordConfigList[i].sword);
                 item.itemName = name;
                 return item;
             }
@@ -222,6 +225,8 @@ public class ItemConfig : ScriptableObject
     }
 
     #endregion
+
+    #endregion GetConfig
 
     /// <summary>
     /// Get Config data when item have only name
@@ -229,7 +234,6 @@ public class ItemConfig : ScriptableObject
     /// <param name="item"></param>
     public Item GetItemConfig(Item item)
     {
-        string itemName = item.itemName;
         switch(item.itemType)
         {
             case ItemType.Book:
