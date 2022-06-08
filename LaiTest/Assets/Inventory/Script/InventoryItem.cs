@@ -64,6 +64,7 @@ public class InventoryItem : MonoBehaviour, IPointerDownHandler,IBeginDragHandle
     {
         transform.SetParent(Inventory.instance.slots[item.slotId].transform);
         rectTransform.anchoredPosition = Vector3.zero;
+        rectTransform.localScale=Vector3.one;
         this.canvas = canvas;
         locateSlotId = item.slotId;
         
