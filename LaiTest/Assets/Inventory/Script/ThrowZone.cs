@@ -8,7 +8,7 @@ public class ThrowZone : MonoBehaviour,IDropHandler
     {
         if(eventData.pointerDrag != null)
         {
-            Inventory.instance.ThrowItem(eventData.pointerDrag.transform.GetComponent<InventoryItem>().locateSlotId);
+            //Inventory.instance.ThrowItem(eventData.pointerDrag.transform.GetComponent<InventoryItem>().locateSlotId);
         }    
     }
 }

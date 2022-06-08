@@ -24,19 +24,19 @@ public class Slot : MonoBehaviour,IDropHandler
                 eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition3D = Vector3.zero;
                 isFill = true;
                 eventData.pointerDrag.GetComponent<InventoryItem>().locateSlotId = slotId;
-                Inventory.instance.ChangeSlot(lastSlotId, slotId);
+                //Inventory.instance.ChangeSlot(lastSlotId, slotId);
                 Inventory.instance.slots[lastSlotId].isFill = false;
                 Inventory.instance.slots[lastSlotId].isFull = false;
             }
-            else if (!isFull)
-            {
-                if(!Inventory.instance.CanAddItem(lastSlotId,slotId))
-                    eventData.pointerDrag.GetComponent<InventoryItem>().ComeBackToSlot();
-            }
-            else
-            {
-                eventData.pointerDrag.GetComponent<InventoryItem>().ComeBackToSlot();
-            }    
+            // else if (!isFull)
+            // {
+            //     if(!Inventory.instance.CanAddItem(lastSlotId,slotId))
+            //         eventData.pointerDrag.GetComponent<InventoryItem>().ComeBackToSlot();
+            // }
+            // else
+            // {
+            //     eventData.pointerDrag.GetComponent<InventoryItem>().ComeBackToSlot();
+            // }    
         }    
         
     }

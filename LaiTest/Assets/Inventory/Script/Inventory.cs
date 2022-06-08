@@ -17,6 +17,7 @@ public class Inventory : MonoBehaviour
 
     public InventoryItem draggedItem;
     public Item draggedItemData;
+
     public static Inventory instance;
     private void Awake()
     {
@@ -48,41 +49,53 @@ public class Inventory : MonoBehaviour
 
     }
     /// <summary>
-    /// Add a item to a unfilled slot, if success, return true, else return false 
+    /// Add a item to a slot, if success, return true, else return false 
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
     public bool AddItemToInventory(Item item)
     {
-        for (int i = 0; i < slots.Count; i++)
+        if (item.slotId != -1)
         {
-            if (!slots[i].isFill)
+            if (!slots[item.slotId].isFill)
             {
-                item.slotId = i;
-                SpawnItem(item);
+                slots[item.slotId].isFill = true;
+                if(item.amount==item.maxAmount) slots[item.slotId].isFull=true;
+
+                InventoryItem tempInventoryItem = Instantiate(inventoryPrefab.GetComponent<InventoryItem>());
+                tempInventoryItem.SetData(inventoryCanvas, item);
+
+                InventoryItemsArray[item.slotId] = tempInventoryItem;
+                InventoryData.Data[item.slotId] = item;
                 return true;
             }
+            else if(item.itemName==InventoryData.Data[item.slotId].itemName&&item.itemType==InventoryData.Data[item.slotId].itemType)
+            {
+                if(item.amount+InventoryData.Data[item.slotId].amount<=item.maxAmount)
+                {
+
+                }
+                else
+                {
+
+                }
+            }
         }
-
-        return false;
-    }
-    /// <summary>
-    /// Add item to a slot, if success, return true, else return false 
-    /// </summary>
-    /// <param name="item"></param>
-    #region Old version
-    public bool SpawnItem(Item item)
-    {
-        int i = item.slotId;
-        if (!slots[i].isFill)
+        else
         {
-            slots[i].isFill = true;
-
-            InventoryItem tempInventoryItem = Instantiate(inventoryPrefab.GetComponent<InventoryItem>());
-            tempInventoryItem.SetData(inventoryCanvas, item);
-            InventoryItemsArray[i] = tempInventoryItem;
-            InventoryData.Data[i] = item;
-            return true;
+            for (int i = 0; i < slots.Count; i++)
+            {
+                if (!slots[i].isFill)
+                {
+                    slots[i].isFill = true;
+                    InventoryItem tempInventoryItem = Instantiate(inventoryPrefab.GetComponent<InventoryItem>());
+                    tempInventoryItem.SetData(inventoryCanvas, item);
+                    tempInventoryItem.rectTransform.localScale = Vector3.one;
+                    InventoryItemsArray[i] = tempInventoryItem;
+                    InventoryData.Data[i] = item;
+                    return true;
+                }
+            }
         }
         return false;
     }
@@ -115,14 +128,14 @@ public class Inventory : MonoBehaviour
         {
             if (InventoryData.Data[i] == null)
                 continue;
-            if(InventoryData.Data[i].amount == InventoryData.Data[i].maxAmount)
+            if (InventoryData.Data[i].amount == InventoryData.Data[i].maxAmount)
             {
                 cleanArray[index++] = InventoryData.Data[i];
                 continue;
-            }    
+            }
             for (int j = i + 1; j < InventoryData.Data.Length; j++)
             {
-                if (InventoryData.Data[j] == null|| InventoryData.Data[j].amount==InventoryData.Data[j].maxAmount)
+                if (InventoryData.Data[j] == null || InventoryData.Data[j].amount == InventoryData.Data[j].maxAmount)
                     continue;
                 if (string.Compare(InventoryData.Data[i].itemName, InventoryData.Data[j].itemName) == 0)
                 {
@@ -130,12 +143,12 @@ public class Inventory : MonoBehaviour
                     {
                         InventoryData.Data[i].amount += InventoryData.Data[j].amount;
                         InventoryData.Data[j] = null;
-                        if( InventoryData.Data[i].amount == InventoryData.Data[i].maxAmount)
+                        if (InventoryData.Data[i].amount == InventoryData.Data[i].maxAmount)
                             break;
-                    }    
-                    else if(InventoryData.Data[i].amount + InventoryData.Data[j].amount > InventoryData.Data[i].maxAmount)
+                    }
+                    else if (InventoryData.Data[i].amount + InventoryData.Data[j].amount > InventoryData.Data[i].maxAmount)
                     {
-                        InventoryData.Data[j].amount-=InventoryData.Data[i].maxAmount- InventoryData.Data[i].amount;
+                        InventoryData.Data[j].amount -= InventoryData.Data[i].maxAmount - InventoryData.Data[i].amount;
                         InventoryData.Data[i].amount = InventoryData.Data[i].maxAmount;
 
                         break;
@@ -145,24 +158,24 @@ public class Inventory : MonoBehaviour
             cleanArray[index++] = InventoryData.Data[i];
         }
 
-        List<String> nameList=new List<String>();
-        for(int i=0; i<cleanArray.Length; i++)
+        List<String> nameList = new List<String>();
+        for (int i = 0; i < cleanArray.Length; i++)
         {
             if (cleanArray[i] == null)
                 break;
             string name = cleanArray[i].itemName;
-            if(!nameList.Contains(name))
+            if (!nameList.Contains(name))
                 nameList.Add(name);
         }
 
         index = 0;
-        for(int i=0; i<nameList.Count; i++)
+        for (int i = 0; i < nameList.Count; i++)
         {
             for (int j = 0; j < cleanArray.Length; j++)
             {
                 if (cleanArray[j] == null)
                     break;
-                if(nameList[i]==cleanArray[j].itemName)
+                if (nameList[i] == cleanArray[j].itemName)
                 {
                     sortedArray[index++] = cleanArray[j];
                 }
@@ -176,11 +189,11 @@ public class Inventory : MonoBehaviour
         }
         for (int i = 0; i < InventoryItemsArray.Length; i++)
         {
-            if(InventoryItemsArray[i] != null)
+            if (InventoryItemsArray[i] != null)
             {
                 Destroy(InventoryItemsArray[i].gameObject);
                 InventoryItemsArray[i] = null;
-            }          
+            }
         }
 
         for (int i = 0; i < InventoryData.Data.Length; i++)
@@ -193,119 +206,40 @@ public class Inventory : MonoBehaviour
                 AddItemToInventory(sortedArray[i]);
 
     }
-    public void ChangeSlot(int oldSlot, int newSlot)
+
+    public void SetDraggedItem(InventoryItem inventoryItem, int draggedAmount)
     {
-        InventoryData.Data[oldSlot].slotId = newSlot;
-        InventoryData.Data[newSlot]=InventoryData.Data[oldSlot];
+        draggedItem = inventoryItem;
 
-        InventoryItemsArray[newSlot]=InventoryItemsArray[oldSlot];
-        InventoryItemsArray[oldSlot] = null;
-    }
-    public bool CanAddItem(int fromSlot, int toSlot)
-    {
-        if (InventoryData.Data[toSlot].itemType != InventoryData.Data[fromSlot].itemType ||
-            InventoryData.Data[toSlot].itemName != InventoryData.Data[fromSlot].itemName ||
-            InventoryData.Data[toSlot].amount == InventoryData.Data[toSlot].maxAmount ||
-            InventoryData.Data[toSlot] == null ||
-            InventoryData.Data[fromSlot] == null)
-            return false;
+        int leftedId = draggedItem.locateSlotId;
+        InventoryData.Data[leftedId].amount -= draggedAmount;
 
-        if (InventoryData.Data[toSlot].amount + InventoryData.Data[fromSlot].amount <= InventoryData.Data[fromSlot].maxAmount)
-        {
-            InventoryData.Data[toSlot].amount += InventoryData.Data[fromSlot].amount;
-
-            slots[fromSlot].isFill = false;
-            slots[fromSlot].isFull = false;
-
-            InventoryItemsArray[toSlot].AmoutText.text = InventoryData.Data[toSlot].amount.ToString();
-
-            Destroy(InventoryItemsArray[fromSlot].gameObject);
-            InventoryItemsArray[fromSlot] = null;
-
-            InventoryData.Data[fromSlot] = null;
-
-            return true;
-        }
-        else if(InventoryData.Data[fromSlot].amount< InventoryData.Data[fromSlot].maxAmount)
-        {
-            InventoryData.Data[fromSlot].amount -= InventoryData.Data[toSlot].maxAmount - InventoryData.Data[toSlot].amount;
-            InventoryData.Data[toSlot].amount = InventoryData.Data[toSlot].maxAmount;
-
-            slots[toSlot].isFull = true;
-
-            InventoryItemsArray[toSlot].AmoutText.text = InventoryData.Data[toSlot].amount.ToString();
-            InventoryItemsArray[fromSlot].AmoutText.text = InventoryData.Data[fromSlot].amount.ToString();
-
-            return false;
-        }
-        else
-        {
-            return false;
-        }         
-    }
-    public void ThrowItem(int slotId)
-    {
-        InventoryData.Data[slotId]=null;
-
-        Destroy(InventoryItemsArray[slotId].gameObject);
-        InventoryItemsArray[slotId] = null;
-
-        slots[slotId].isFull = false;
-        slots[slotId].isFill = false;
-    }
-    public void RightMouseButtonDragItem(int slotId)
-    {
-        InventoryItem tempInventoryItem = Instantiate(inventoryPrefab.GetComponent<InventoryItem>());
-        InventoryData.Data[slotId].amount--;
-        tempInventoryItem.SetData(inventoryCanvas,InventoryData.Data[slotId]);
-        InventoryItemsArray[slotId]=tempInventoryItem;
-        
-        Item dragedItem=CloneItem(InventoryData.Data[slotId]);
-        dragedItem.amount=1;
-    }
-    public void RightMouseButtonDropItem(int fromDlotId,int toSlotID)
-    {
-
-    }
-    private Item CloneItem(Item item)
-    {
-        return item;
-    }
-    #endregion
-
-    #region Update version
-    public void SetDraggedItem(InventoryItem inventoryItem,int draggedAmount)
-    {
-        draggedItem=inventoryItem;
-
-        int leftedId=draggedItem.locateSlotId;
-        InventoryData.Data[leftedId].amount-=draggedAmount;
-        
-        if(InventoryData.Data[leftedId].amount==1) InventoryItemsArray[leftedId].AmoutText.text="";else InventoryItemsArray[leftedId].AmoutText.text=InventoryData.Data[leftedId].amount.ToString();
+        if (InventoryData.Data[leftedId].amount == 1) InventoryItemsArray[leftedId].AmoutText.text = ""; else InventoryItemsArray[leftedId].AmoutText.text = InventoryData.Data[leftedId].amount.ToString();
 
         //InventoryItemsArray[leftedId]
     }
     public void SetDraggedItem(InventoryItem inventoryItem)
     {
-        draggedItem=inventoryItem;
-        int fromSlotID=draggedItem.locateSlotId;
-        draggedItemData=InventoryData.Data[fromSlotID];
+        draggedItem = inventoryItem;
+        draggedItemData = InventoryData.Data[draggedItem.locateSlotId];
 
-        InventoryData.Data[fromSlotID]=null;
-        InventoryItemsArray[fromSlotID]=null;
+        InventoryData.Data[draggedItem.locateSlotId] = null;
+        InventoryItemsArray[draggedItem.locateSlotId] = null;
 
-        draggedItem.locateSlotId=-1;
-        draggedItemData.slotId=-1;
+        slots[draggedItem.locateSlotId].isFill = false;
+        slots[draggedItem.locateSlotId].isFull = false;
+
+        draggedItem.locateSlotId = -1;
+        draggedItemData.slotId = -1;
     }
     public void ChangeSlot(int slotID)
     {
-        if(!slots[slotID].isFill)
+        if (!slots[slotID].isFill)
         {
 
         }
     }
-    #endregion
-    
+
 
     #region Data
     private void SaveData(string data, string fileName)
@@ -340,7 +274,7 @@ public class Inventory : MonoBehaviour
 
             foreach (var item in tempInventoryItemsListData.Data)
             {
-                SpawnItem(item);
+                AddItemToInventory(item);
             }
         }
         else

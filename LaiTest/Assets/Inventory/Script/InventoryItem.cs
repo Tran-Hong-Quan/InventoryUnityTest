@@ -44,7 +44,6 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
             canvasGroup.alpha = 0.8f;
 
             AmoutText.text="";
-            Inventory.instance.RightMouseButtonDragItem(locateSlotId);
             Inventory.instance.slots[locateSlotId].isFull=false;
         }
 
