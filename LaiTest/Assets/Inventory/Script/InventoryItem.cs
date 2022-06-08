@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InventoryItem : MonoBehaviour, IPointerDownHandler,IBeginDragHandler,IEndDragHandler,IDragHandler
+public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     [Header("UI")]
     public RectTransform rectTransform;
@@ -13,6 +13,7 @@ public class InventoryItem : MonoBehaviour, IPointerDownHandler,IBeginDragHandle
     private CanvasGroup canvasGroup;
     [HideInInspector] public Canvas canvas;
     [HideInInspector] public int locateSlotId;
+    //[HideInInspector] public bool canDrag=false;
 
     private void Awake()
     {
@@ -25,18 +26,35 @@ public class InventoryItem : MonoBehaviour, IPointerDownHandler,IBeginDragHandle
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
         image = GetComponent<Image>();
-    }    
+    }
     public void OnBeginDrag(PointerEventData eventData)
     {
-        transform.SetParent(canvas.transform);
-        transform.SetAsLastSibling();
-        canvasGroup.blocksRaycasts = false;
-        canvasGroup.alpha = 0.8f;
+        if (Input.GetMouseButton(0)||Inventory.instance.InventoryData.Data[locateSlotId].amount==1)
+        {
+            transform.SetParent(canvas.transform);
+            transform.SetAsLastSibling();
+            canvasGroup.blocksRaycasts = false;
+            canvasGroup.alpha = 0.8f;
+        }
+        else if (Input.GetMouseButton(1))
+        {
+            transform.SetParent(canvas.transform);
+            transform.SetAsLastSibling();
+            canvasGroup.blocksRaycasts = false;
+            canvasGroup.alpha = 0.8f;
+
+            AmoutText.text="";
+            Inventory.instance.RightMouseButtonDragItem(locateSlotId);
+            Inventory.instance.slots[locateSlotId].isFull=false;
+        }
+
+        Inventory.instance.draggedItem=this;
+
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        rectTransform.anchoredPosition += eventData.delta/canvas.scaleFactor;
+        rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -45,11 +63,6 @@ public class InventoryItem : MonoBehaviour, IPointerDownHandler,IBeginDragHandle
         canvasGroup.alpha = 1f;
         if (transform.parent == canvas.transform)
             ComeBackToSlot();
-    }
-
-    public void OnPointerDown(PointerEventData eventData)
-    {
-
     }
 
     public void ComeBackToSlot()
@@ -64,17 +77,14 @@ public class InventoryItem : MonoBehaviour, IPointerDownHandler,IBeginDragHandle
     {
         transform.SetParent(Inventory.instance.slots[item.slotId].transform);
         rectTransform.anchoredPosition = Vector3.zero;
+        rectTransform.localScale=Vector3.one;
         this.canvas = canvas;
         locateSlotId = item.slotId;
-        
-        if(item.amount>1) AmoutText.text=item.amount.ToString();
-        image.sprite=Resources.Load<Sprite>($"Image/{item.itemName}");
-    }    
 
-    #region UI
+        if (item.amount > 1) AmoutText.text = item.amount.ToString();
+        image.sprite = Resources.Load<Sprite>($"Image/{item.itemName}");
+    }
 
-   
 
-    #endregion UI
 
 }

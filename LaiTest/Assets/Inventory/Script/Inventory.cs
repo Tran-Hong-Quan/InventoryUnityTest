@@ -15,6 +15,8 @@ public class Inventory : MonoBehaviour
     [HideInInspector] public InventoryItem[] InventoryItemsArray;
     [SerializeField] private ItemConfig itemConfig;
 
+    public InventoryItem draggedItem;
+    public Item draggedItemData;
     public static Inventory instance;
     private void Awake()
     {
@@ -68,6 +70,7 @@ public class Inventory : MonoBehaviour
     /// Add item to a slot, if success, return true, else return false 
     /// </summary>
     /// <param name="item"></param>
+    #region Old version
     public bool SpawnItem(Item item)
     {
         int i = item.slotId;
@@ -77,14 +80,12 @@ public class Inventory : MonoBehaviour
 
             InventoryItem tempInventoryItem = Instantiate(inventoryPrefab.GetComponent<InventoryItem>());
             tempInventoryItem.SetData(inventoryCanvas, item);
-            tempInventoryItem.rectTransform.localScale=Vector3.one;
             InventoryItemsArray[i] = tempInventoryItem;
             InventoryData.Data[i] = item;
             return true;
         }
         return false;
     }
-
     public void ClearInventory()
     {
         for (int i = 0; i < InventoryItemsArray.Length; i++)
@@ -167,8 +168,6 @@ public class Inventory : MonoBehaviour
                 }
             }
         }
-        
-
 
         for (int i = 0; i < slots.Count; i++)
         {
@@ -254,6 +253,59 @@ public class Inventory : MonoBehaviour
         slots[slotId].isFull = false;
         slots[slotId].isFill = false;
     }
+    public void RightMouseButtonDragItem(int slotId)
+    {
+        InventoryItem tempInventoryItem = Instantiate(inventoryPrefab.GetComponent<InventoryItem>());
+        InventoryData.Data[slotId].amount--;
+        tempInventoryItem.SetData(inventoryCanvas,InventoryData.Data[slotId]);
+        InventoryItemsArray[slotId]=tempInventoryItem;
+        
+        Item dragedItem=CloneItem(InventoryData.Data[slotId]);
+        dragedItem.amount=1;
+    }
+    public void RightMouseButtonDropItem(int fromDlotId,int toSlotID)
+    {
+
+    }
+    private Item CloneItem(Item item)
+    {
+        return item;
+    }
+    #endregion
+
+    #region Update version
+    public void SetDraggedItem(InventoryItem inventoryItem,int draggedAmount)
+    {
+        draggedItem=inventoryItem;
+
+        int leftedId=draggedItem.locateSlotId;
+        InventoryData.Data[leftedId].amount-=draggedAmount;
+        
+        if(InventoryData.Data[leftedId].amount==1) InventoryItemsArray[leftedId].AmoutText.text="";else InventoryItemsArray[leftedId].AmoutText.text=InventoryData.Data[leftedId].amount.ToString();
+
+        //InventoryItemsArray[leftedId]
+    }
+    public void SetDraggedItem(InventoryItem inventoryItem)
+    {
+        draggedItem=inventoryItem;
+        int fromSlotID=draggedItem.locateSlotId;
+        draggedItemData=InventoryData.Data[fromSlotID];
+
+        InventoryData.Data[fromSlotID]=null;
+        InventoryItemsArray[fromSlotID]=null;
+
+        draggedItem.locateSlotId=-1;
+        draggedItemData.slotId=-1;
+    }
+    public void ChangeSlot(int slotID)
+    {
+        if(!slots[slotID].isFill)
+        {
+
+        }
+    }
+    #endregion
+    
 
     #region Data
     private void SaveData(string data, string fileName)
