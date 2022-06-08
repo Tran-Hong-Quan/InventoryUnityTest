@@ -77,7 +77,7 @@ public class Inventory : MonoBehaviour
 
             InventoryItem tempInventoryItem = Instantiate(inventoryPrefab.GetComponent<InventoryItem>());
             tempInventoryItem.SetData(inventoryCanvas, item);
-
+            tempInventoryItem.rectTransform.localScale=Vector3.one;
             InventoryItemsArray[i] = tempInventoryItem;
             InventoryData.Data[i] = item;
             return true;
@@ -163,7 +163,7 @@ public class Inventory : MonoBehaviour
                     break;
                 if(nameList[i]==cleanArray[j].itemName)
                 {
-                    sortedArray[index++] = cleanArray[i];
+                    sortedArray[index++] = cleanArray[j];
                 }
             }
         }
