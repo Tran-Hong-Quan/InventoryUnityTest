@@ -1,5 +1,4 @@
-﻿using System.Net.Http;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,6 +19,8 @@ public class Inventory : MonoBehaviour
     [HideInInspector] public Item draggedItemData;
     [HideInInspector] public int lastSlotID;
 
+    public static InventoryInput GetInput;
+
     public static Inventory instance;
     private void Awake()
     {
@@ -31,6 +32,8 @@ public class Inventory : MonoBehaviour
         InventoryItemsArray = new InventoryItem[slots.Count];
         InventoryData = new InventoryItemData(slots.Count);
 
+        GetInput = new InventoryInput();
+
     }
 
     void Start()
@@ -39,18 +42,15 @@ public class Inventory : MonoBehaviour
         {
             Item book = new Item(ItemType.Book, "book");
             book = itemConfig.GetItemConfig(book);
-            book.slotId = -1;
             AddItemToInventory(book);
 
             Item gun = new Item(ItemType.Gun, "gun");
             gun = itemConfig.GetItemConfig(gun);
-            gun.slotId = -1;
             AddItemToInventory(gun);
 
             Item food = new Item(ItemType.Food, "food");
             itemConfig.GetItemConfig(ref food);
             food.amount = 3;
-            food.slotId = -1;
             AddItemToInventory(food);
         }
 
@@ -136,7 +136,7 @@ public class Inventory : MonoBehaviour
 
         for (int i = 0; i < InventoryData.Data.Length; i++)
         {
-            if (InventoryData.Data[i] == null)
+            if (InventoryData.Data[i] == null||InventoryData.Data[i].itemName=="")
                 continue;
             if (InventoryData.Data[i].amount == InventoryData.Data[i].maxAmount)
             {
@@ -224,17 +224,18 @@ public class Inventory : MonoBehaviour
     {
         draggedItem = inventoryItem;
         lastSlotID = draggedItem.locateSlotId;
-        draggedItemData=new Item(InventoryData.Data[lastSlotID].itemType,InventoryData.Data[lastSlotID].itemName);
+        draggedItemData = new Item(InventoryData.Data[lastSlotID].itemType, InventoryData.Data[lastSlotID].itemName);
         itemConfig.GetItemConfig(ref draggedItemData);
+        draggedItemData.amount = draggedAmount;
 
         InventoryData.Data[lastSlotID].amount -= draggedAmount;
         InventoryItem tempInventoryItem = Instantiate(inventoryPrefab);
         tempInventoryItem.SetData(inventoryCanvas, InventoryData.Data[lastSlotID]);
-        InventoryItemsArray[lastSlotID]=tempInventoryItem;
+        InventoryItemsArray[lastSlotID] = tempInventoryItem;
 
         slots[lastSlotID].isFull = false;
 
-        if (InventoryData.Data[lastSlotID].amount == 1) InventoryItemsArray[lastSlotID].AmoutText.text = ""; else InventoryItemsArray[lastSlotID].AmoutText.text = InventoryData.Data[lastSlotID].amount.ToString();
+        if (InventoryData.Data[lastSlotID].amount == 1) InventoryItemsArray[lastSlotID].amoutText.text = ""; else InventoryItemsArray[lastSlotID].amoutText.text = InventoryData.Data[lastSlotID].amount.ToString();
 
         draggedItem.locateSlotId = -1;
         draggedItemData.slotId = -1;
@@ -260,41 +261,41 @@ public class Inventory : MonoBehaviour
         {
             //Debug.Log("Drop to unfilled slot");
             slot.DropItem(draggedItem);
-            if(draggedItemData.amount==draggedItemData.maxAmount)slot.isFull=true;
-            slot.isFill=true;
+            if (draggedItemData.amount == draggedItemData.maxAmount) slot.isFull = true;
+            slot.isFill = true;
 
             InventoryData.Data[slot.slotId] = draggedItemData;
-            InventoryData.Data[slot.slotId].slotId=slot.slotId;
-            InventoryItemsArray[slot.slotId]=draggedItem;
+            InventoryData.Data[slot.slotId].slotId = slot.slotId;
+            InventoryItemsArray[slot.slotId] = draggedItem;
 
         }
-        else if (!slot.isFull&&draggedItemData.itemName==InventoryData.Data[slot.slotId].itemName)
+        else if (!slot.isFull && draggedItemData.itemName == InventoryData.Data[slot.slotId].itemName)
         {
-            if (InventoryData.Data[slot.slotId].amount!=InventoryData.Data[slot.slotId].maxAmount)
+            if (InventoryData.Data[slot.slotId].amount != InventoryData.Data[slot.slotId].maxAmount)
             {
-                if(draggedItemData.amount+InventoryData.Data[slot.slotId].amount<=InventoryData.Data[slot.slotId].maxAmount)
+                if (draggedItemData.amount + InventoryData.Data[slot.slotId].amount <= InventoryData.Data[slot.slotId].maxAmount)
                 {
                     //Debug.Log("Drop to unfull slot and sum of item amout is less or equal than max amount");
-                    InventoryData.Data[slot.slotId].amount+=draggedItemData.amount;
-                    InventoryItemsArray[slot.slotId].AmoutText.text=InventoryData.Data[slot.slotId].amount.ToString();
+                    InventoryData.Data[slot.slotId].amount += draggedItemData.amount;
+                    InventoryItemsArray[slot.slotId].amoutText.text = InventoryData.Data[slot.slotId].amount.ToString();
 
                     Destroy(draggedItem.gameObject);
-                    if(InventoryData.Data[slot.slotId].amount== InventoryData.Data[slot.slotId].maxAmount) slot.isFull=true;
+                    if (InventoryData.Data[slot.slotId].amount == InventoryData.Data[slot.slotId].maxAmount) slot.isFull = true;
 
                 }
                 else
                 {
                     //Debug.Log("Drop to unfull slot and sum of item amount is greater max amount");
-                    draggedItemData.amount-=InventoryData.Data[slot.slotId].maxAmount-InventoryData.Data[slot.slotId].amount;
-                    InventoryData.Data[slot.slotId].amount=InventoryData.Data[slot.slotId].maxAmount;
-                    InventoryItemsArray[slot.slotId].AmoutText.text=InventoryData.Data[slot.slotId].amount.ToString();
+                    draggedItemData.amount -= InventoryData.Data[slot.slotId].maxAmount - InventoryData.Data[slot.slotId].amount;
+                    InventoryData.Data[slot.slotId].amount = InventoryData.Data[slot.slotId].maxAmount;
+                    InventoryItemsArray[slot.slotId].amoutText.text = InventoryData.Data[slot.slotId].amount.ToString();
 
                     slots[lastSlotID].DropItem(draggedItem);
-                    slot.isFull=true;
-                    draggedItem.AmoutText.text=draggedItemData.amount.ToString();
-                    InventoryItemsArray[lastSlotID]=draggedItem;
-                    InventoryData.Data[lastSlotID]=draggedItemData;
-                    InventoryData.Data[lastSlotID].slotId=lastSlotID;
+                    slot.isFull = true;
+                    draggedItem.amoutText.text = draggedItemData.amount.ToString();
+                    InventoryItemsArray[lastSlotID] = draggedItem;
+                    InventoryData.Data[lastSlotID] = draggedItemData;
+                    InventoryData.Data[lastSlotID].slotId = lastSlotID;
                 }
             }
 
@@ -305,7 +306,7 @@ public class Inventory : MonoBehaviour
             slots[lastSlotID].DropItem(draggedItem);
 
             InventoryData.Data[lastSlotID] = draggedItemData;
-            InventoryItemsArray[lastSlotID]=draggedItem;
+            InventoryItemsArray[lastSlotID] = draggedItem;
         }
 
         draggedItem = null;
@@ -361,7 +362,18 @@ public class Inventory : MonoBehaviour
     }
     #endregion Data
 
+
+    private void OnEnable()
+    {
+        GetInput.Enable();
+    }
+    private void OnDisable()
+    {
+        GetInput.Disable();
+    }
+
 }
+
 
 [Serializable]
 public class InventoryItemData

@@ -86,6 +86,7 @@ public class ItemConfig : ScriptableObject
                 item.maxAmount = manaRcoveryConfigList[i].maxAmount;
                 item.itemData = JsonUtility.ToJson(manaRcoveryConfigList[i].mana);
                 item.itemName = name;
+                item.slotId=-1;
                 return item;
             }
         return null;
@@ -112,6 +113,7 @@ public class ItemConfig : ScriptableObject
                 item.maxAmount = healFlaskConfigList[i].maxAmount;
                 item.itemData = JsonUtility.ToJson(healFlaskConfigList[i].heal);
                 item.itemName = name;
+                item.slotId=-1;
                 return item;
             }
         return null;
@@ -139,6 +141,7 @@ public class ItemConfig : ScriptableObject
                 item.maxAmount = foodConfigList[i].maxAmount;
                 item.itemData = JsonUtility.ToJson(foodConfigList[i].food);
                 item.itemName = name;
+                item.slotId=-1;
                 return item;
             }
         return null;
@@ -166,6 +169,7 @@ public class ItemConfig : ScriptableObject
                 item.maxAmount = gunConfigList[i].maxAmount;
                 item.itemData = JsonUtility.ToJson(gunConfigList[i].gun);
                 item.itemName = name;
+                item.slotId=-1;
                 return item;
             }    
         return null;
@@ -192,6 +196,7 @@ public class ItemConfig : ScriptableObject
                 item.maxAmount = bookConfigList[i].maxAmount;
                 item.itemData = JsonUtility.ToJson(bookConfigList[i].book);
                 item.itemName = name;
+                item.slotId=-1;
                 return item;
             }
         return null;
@@ -219,6 +224,7 @@ public class ItemConfig : ScriptableObject
                 item.maxAmount = swordConfigList[i].maxAmount;
                 item.itemData = JsonUtility.ToJson(swordConfigList[i].sword);
                 item.itemName = name;
+                item.slotId=-1;
                 return item;
             }
         return null;

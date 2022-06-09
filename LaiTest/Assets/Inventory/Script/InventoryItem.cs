@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     [Header("UI")]
     public RectTransform rectTransform;
-    public Text AmoutText;
+    public Text amoutText;
     public Image image;
     private CanvasGroup canvasGroup;
     [HideInInspector] public Canvas canvas;
     [HideInInspector] public int locateSlotId;
     //[HideInInspector] public bool canDrag=false;
+
+
 
     private void Awake()
     {
@@ -29,7 +32,23 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (Input.GetMouseButton(0)||Inventory.instance.InventoryData.Data[locateSlotId].amount==1)
+        if (Inventory.GetInput.GetKey.LeftShift.IsPressed() && Inventory.instance.InventoryData.Data[locateSlotId].amount != 1)
+        {
+            transform.SetParent(canvas.transform);
+            transform.SetAsLastSibling();
+            canvasGroup.blocksRaycasts = false;
+            canvasGroup.alpha = 0.8f;
+
+            int draggedAmount = 0;
+            int amount = Inventory.instance.InventoryData.Data[locateSlotId].amount;
+
+            draggedAmount = amount / 2 + (amount % 2 == 0 ? 0 : 1);
+
+            if (draggedAmount > 1) amoutText.text = draggedAmount.ToString(); else amoutText.text = "";
+
+            Inventory.instance.SetDraggedItem(this, draggedAmount);
+        }
+        else if (Inventory.GetInput.GetKey.LeftMouse.IsPressed()|| Inventory.instance.InventoryData.Data[locateSlotId].amount == 1)
         {
             transform.SetParent(canvas.transform);
             transform.SetAsLastSibling();
@@ -38,16 +57,17 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 
             Inventory.instance.SetDraggedItem(this);
         }
-        else if (Input.GetMouseButton(1))
+        else if (Inventory.GetInput.GetKey.RightMouse.IsPressed() || Input.GetMouseButton(1))
         {
             transform.SetParent(canvas.transform);
             transform.SetAsLastSibling();
             canvasGroup.blocksRaycasts = false;
             canvasGroup.alpha = 0.8f;
-            AmoutText.text="";
+            amoutText.text = "";
 
-            Inventory.instance.SetDraggedItem(this,1);
+            Inventory.instance.SetDraggedItem(this, 1);
         }
+
 
     }
 
@@ -61,7 +81,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
         canvasGroup.blocksRaycasts = true;
         canvasGroup.alpha = 1f;
 
-        if(transform.parent==canvas.transform)
+        if (transform.parent == canvas.transform)
             Inventory.instance.CombackToLastSlot();
     }
 
@@ -72,11 +92,11 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     {
         transform.SetParent(Inventory.instance.slots[item.slotId].transform);
         rectTransform.anchoredPosition = Vector3.zero;
-        rectTransform.localScale=Vector3.one;
+        rectTransform.localScale = Vector3.one;
         this.canvas = canvas;
         locateSlotId = item.slotId;
 
-        if (item.amount > 1) AmoutText.text = item.amount.ToString();
+        if (item.amount > 1) amoutText.text = item.amount.ToString();
         image.sprite = Resources.Load<Sprite>($"Image/{item.itemName}");
     }
 

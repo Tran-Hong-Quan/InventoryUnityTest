@@ -27,6 +27,10 @@ public class Item
     {
         this.itemType = itemType;
         this.itemName = itemName;
+
+        slotId=-1;
+        amount=1;
+        maxAmount=10;
     }
 }
 
