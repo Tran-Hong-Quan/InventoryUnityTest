@@ -35,6 +35,8 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
             transform.SetAsLastSibling();
             canvasGroup.blocksRaycasts = false;
             canvasGroup.alpha = 0.8f;
+
+            Inventory.instance.SetDraggedItem(this);
         }
         else if (Input.GetMouseButton(1))
         {
@@ -42,12 +44,10 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
             transform.SetAsLastSibling();
             canvasGroup.blocksRaycasts = false;
             canvasGroup.alpha = 0.8f;
-
             AmoutText.text="";
-            Inventory.instance.slots[locateSlotId].isFull=false;
-        }
 
-        Inventory.instance.draggedItem=this;
+            Inventory.instance.SetDraggedItem(this,1);
+        }
 
     }
 
@@ -60,16 +60,12 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     {
         canvasGroup.blocksRaycasts = true;
         canvasGroup.alpha = 1f;
-        if (transform.parent == canvas.transform)
-            ComeBackToSlot();
+
+        if(transform.parent==canvas.transform)
+            Inventory.instance.CombackToLastSlot();
     }
 
-    public void ComeBackToSlot()
-    {
-        Slot lastSlot = Inventory.instance.slots[locateSlotId];
-        transform.SetParent(lastSlot.transform);
-        rectTransform.anchoredPosition3D = Vector3.zero;
-    }
+
     #endregion Drag and Drop
 
     public void SetData(Canvas canvas, Item item)

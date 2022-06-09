@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44402185, g: 0.49316466, b: 0.57223153, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3931,11 +3931,23 @@ MonoBehaviour:
   - {fileID: 1568846892}
   - {fileID: 1921717879}
   - {fileID: 248777943}
-  inventoryPrefab: {fileID: 416545366276080311, guid: c2320ece7a0edcf4eb65ae1f9f405ae1, type: 3}
-  inventoryItemListData:
-    inventoryItemListData: []
-  InventoryItemsList: []
+  inventoryPrefab: {fileID: 5000518693965673357, guid: c2320ece7a0edcf4eb65ae1f9f405ae1,
+    type: 3}
+  InventoryData:
+    Data: []
+  InventoryItemsArray: []
   itemConfig: {fileID: 11400000, guid: fe6b801c34fb4254585fce9ea17055d5, type: 2}
+  draggedItem: {fileID: 5000518693965673357, guid: c2320ece7a0edcf4eb65ae1f9f405ae1,
+    type: 3}
+  draggedItemData:
+    itemType: 0
+    itemData: 
+    itemName: 
+    itemInformation: 
+    slotId: 0
+    amount: 0
+    maxAmount: 0
+  lastSlotID: 0
 --- !u!4 &1966239188
 Transform:
   m_ObjectHideFlags: 0

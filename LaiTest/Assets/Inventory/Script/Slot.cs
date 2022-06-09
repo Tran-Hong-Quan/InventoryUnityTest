@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.Diagnostics;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -15,29 +16,18 @@ public class Slot : MonoBehaviour,IDropHandler
 
     public void OnDrop(PointerEventData eventData)
     {
-        if(eventData.pointerDrag != null)
+        if(eventData.pointerDrag.GetComponent<InventoryItem>() != null)
         {
-            int lastSlotId = eventData.pointerDrag.GetComponent<InventoryItem>().locateSlotId;
-            if (!isFill)
-            {
-                eventData.pointerDrag.transform.SetParent(transform);
-                eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition3D = Vector3.zero;
-                isFill = true;
-                eventData.pointerDrag.GetComponent<InventoryItem>().locateSlotId = slotId;
-                //Inventory.instance.ChangeSlot(lastSlotId, slotId);
-                Inventory.instance.slots[lastSlotId].isFill = false;
-                Inventory.instance.slots[lastSlotId].isFull = false;
-            }
-            // else if (!isFull)
-            // {
-            //     if(!Inventory.instance.CanAddItem(lastSlotId,slotId))
-            //         eventData.pointerDrag.GetComponent<InventoryItem>().ComeBackToSlot();
-            // }
-            // else
-            // {
-            //     eventData.pointerDrag.GetComponent<InventoryItem>().ComeBackToSlot();
-            // }    
-        }    
+            Inventory.instance.DropItem(this);
+        }   
         
+    }
+
+    public void DropItem(InventoryItem droppedItem)
+    {
+        droppedItem.transform.SetParent(transform);
+        droppedItem.rectTransform.anchoredPosition=Vector2.zero;
+        droppedItem.locateSlotId=slotId;
+        isFill=true;
     }
 }
