@@ -104,6 +104,10 @@ public class Inventory : MonoBehaviour
                     InventoryData.Data[i] = item;
                     return true;
                 }
+                else if(!slots[i].isFill)
+                {
+                    return false;
+                }
             }
         }
         return false;
@@ -136,10 +140,7 @@ public class Inventory : MonoBehaviour
         for (int i = 0; i < InventoryData.Data.Length; i++)
         {
             if (InventoryData.Data[i] == null || InventoryData.Data[i].itemName == "")
-            {
-                InventoryData.Data[i] = null;
                 continue;
-            }
             if (InventoryData.Data[i].amount == InventoryData.Data[i].maxAmount)
             {
                 cleanArray[index++] = InventoryData.Data[i];
