@@ -50,8 +50,6 @@ public enum ItemType
 [Serializable]
 public class ConsumableItem
 {
-    public int amount;
-    public int maxAmount;
     public int level;
     public int denominations;
 }

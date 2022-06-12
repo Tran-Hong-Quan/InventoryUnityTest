@@ -18,6 +18,7 @@ public class Slot : MonoBehaviour,IDropHandler
     {
         if(eventData.pointerDrag.GetComponent<InventoryItem>() != null)
         {
+            UnityEngine.Debug.Log($"Drop to slot {slotId}");
             Inventory.instance.DropItem(this);
         }   
         

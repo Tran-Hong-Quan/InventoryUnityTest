@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using UnityEngine.InputSystem;
 
 public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
@@ -15,8 +14,6 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     [HideInInspector] public Canvas canvas;
     [HideInInspector] public int locateSlotId;
     //[HideInInspector] public bool canDrag=false;
-
-
 
     private void Awake()
     {
@@ -32,8 +29,10 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (Inventory.GetInput.GetKey.LeftShift.IsPressed() && Inventory.instance.InventoryData.Data[locateSlotId].amount != 1)
+        int draggedItemAmount=Inventory.instance.InventoryData.Data[locateSlotId].amount;
+        if ((Inventory.instance.takeHalfItemButton.isHolding||Input.GetKey(KeyCode.LeftShift)) && draggedItemAmount!=1)
         {
+            Debug.Log("Drag half item");
             transform.SetParent(canvas.transform);
             transform.SetAsLastSibling();
             canvasGroup.blocksRaycasts = false;
@@ -48,17 +47,9 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 
             Inventory.instance.SetDraggedItem(this, draggedAmount);
         }
-        else if (Inventory.GetInput.GetKey.LeftMouse.IsPressed()|| Inventory.instance.InventoryData.Data[locateSlotId].amount == 1)
+        else if ((Inventory.instance.takeOneItemButton.isHolding||Input.GetMouseButton(1))&& draggedItemAmount!=1)
         {
-            transform.SetParent(canvas.transform);
-            transform.SetAsLastSibling();
-            canvasGroup.blocksRaycasts = false;
-            canvasGroup.alpha = 0.8f;
-
-            Inventory.instance.SetDraggedItem(this);
-        }
-        else if (Inventory.GetInput.GetKey.RightMouse.IsPressed() || Input.GetMouseButton(1))
-        {
+            Debug.Log("Drag 1 item");
             transform.SetParent(canvas.transform);
             transform.SetAsLastSibling();
             canvasGroup.blocksRaycasts = false;
@@ -67,7 +58,16 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 
             Inventory.instance.SetDraggedItem(this, 1);
         }
+        else
+        {
+            Debug.Log("Drag all item");
+            transform.SetParent(canvas.transform);
+            transform.SetAsLastSibling();
+            canvasGroup.blocksRaycasts = false;
+            canvasGroup.alpha = 0.8f;
 
+            Inventory.instance.SetDraggedItem(this);
+        }
 
     }
 

@@ -19,7 +19,8 @@ public class Inventory : MonoBehaviour
     [HideInInspector] public Item draggedItemData;
     [HideInInspector] public int lastSlotID;
 
-    public static InventoryInput GetInput;
+    public UIButton takeOneItemButton;
+    public UIButton takeHalfItemButton;
 
     public static Inventory instance;
     private void Awake()
@@ -31,8 +32,6 @@ public class Inventory : MonoBehaviour
 
         InventoryItemsArray = new InventoryItem[slots.Count];
         InventoryData = new InventoryItemData(slots.Count);
-
-        GetInput = new InventoryInput();
 
     }
 
@@ -136,8 +135,11 @@ public class Inventory : MonoBehaviour
 
         for (int i = 0; i < InventoryData.Data.Length; i++)
         {
-            if (InventoryData.Data[i] == null||InventoryData.Data[i].itemName=="")
+            if (InventoryData.Data[i] == null || InventoryData.Data[i].itemName == "")
+            {
+                InventoryData.Data[i] = null;
                 continue;
+            }
             if (InventoryData.Data[i].amount == InventoryData.Data[i].maxAmount)
             {
                 cleanArray[index++] = InventoryData.Data[i];
@@ -171,8 +173,8 @@ public class Inventory : MonoBehaviour
         List<String> nameList = new List<String>();
         for (int i = 0; i < cleanArray.Length; i++)
         {
-            if (cleanArray[i] == null)
-                break;
+            if (cleanArray[i] == null||cleanArray[i].itemName=="")
+                continue;
             string name = cleanArray[i].itemName;
             if (!nameList.Contains(name))
                 nameList.Add(name);
@@ -181,10 +183,12 @@ public class Inventory : MonoBehaviour
         index = 0;
         for (int i = 0; i < nameList.Count; i++)
         {
+            if(nameList[i]=="")
+                continue;
             for (int j = 0; j < cleanArray.Length; j++)
             {
                 if (cleanArray[j] == null)
-                    break;
+                    continue;
                 if (nameList[i] == cleanArray[j].itemName)
                 {
                     sortedArray[index++] = cleanArray[j];
@@ -209,9 +213,9 @@ public class Inventory : MonoBehaviour
         for (int i = 0; i < InventoryData.Data.Length; i++)
             InventoryData.Data[i] = null;
 
-        for (int i = 0; i < cleanArray.Length; i++)
-            if (sortedArray[i] == null)
-                break;
+        for (int i = 0; i < sortedArray.Length; i++)
+            if (sortedArray[i] == null || sortedArray[i].itemName != "")
+                continue;
             else
             {
                 sortedArray[i].slotId = -1;
@@ -259,7 +263,7 @@ public class Inventory : MonoBehaviour
     {
         if (!slot.isFill)
         {
-            //Debug.Log("Drop to unfilled slot");
+            Debug.Log("Drop to unfilled slot");
             slot.DropItem(draggedItem);
             if (draggedItemData.amount == draggedItemData.maxAmount) slot.isFull = true;
             slot.isFill = true;
@@ -275,7 +279,7 @@ public class Inventory : MonoBehaviour
             {
                 if (draggedItemData.amount + InventoryData.Data[slot.slotId].amount <= InventoryData.Data[slot.slotId].maxAmount)
                 {
-                    //Debug.Log("Drop to unfull slot and sum of item amout is less or equal than max amount");
+                    Debug.Log("Drop to unfull slot and sum of item amout is less or equal than max amount");
                     InventoryData.Data[slot.slotId].amount += draggedItemData.amount;
                     InventoryItemsArray[slot.slotId].amoutText.text = InventoryData.Data[slot.slotId].amount.ToString();
 
@@ -285,7 +289,7 @@ public class Inventory : MonoBehaviour
                 }
                 else
                 {
-                    //Debug.Log("Drop to unfull slot and sum of item amount is greater max amount");
+                    Debug.Log("Drop to unfull slot and sum of item amount is greater max amount");
                     draggedItemData.amount -= InventoryData.Data[slot.slotId].maxAmount - InventoryData.Data[slot.slotId].amount;
                     InventoryData.Data[slot.slotId].amount = InventoryData.Data[slot.slotId].maxAmount;
                     InventoryItemsArray[slot.slotId].amoutText.text = InventoryData.Data[slot.slotId].amount.ToString();
@@ -302,7 +306,7 @@ public class Inventory : MonoBehaviour
         }
         else
         {
-            //Debug.Log("Drop to an unavailable slot");
+            Debug.Log("Drop to an unavailable slot");
             slots[lastSlotID].DropItem(draggedItem);
 
             InventoryData.Data[lastSlotID] = draggedItemData;
@@ -317,6 +321,13 @@ public class Inventory : MonoBehaviour
     public void CombackToLastSlot()
     {
         DropItem(slots[lastSlotID]);
+    }
+
+    public void SetNullDraggedItem()
+    {
+        draggedItem = null;
+        draggedItemData = null;
+        lastSlotID = -1;
     }
 
     #region Data
@@ -361,16 +372,6 @@ public class Inventory : MonoBehaviour
         }
     }
     #endregion Data
-
-
-    private void OnEnable()
-    {
-        GetInput.Enable();
-    }
-    private void OnDisable()
-    {
-        GetInput.Disable();
-    }
 
 }
 
