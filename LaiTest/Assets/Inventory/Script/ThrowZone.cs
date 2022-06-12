@@ -6,6 +6,7 @@ public class ThrowZone : MonoBehaviour,IDropHandler
     {
         if(eventData.pointerDrag.GetComponent<InventoryItem>() != null)
         {
+            Debug.Log("Throw item");
             Inventory.instance.SetNullDraggedItem();
             Destroy(eventData.pointerDrag.gameObject);
         }    

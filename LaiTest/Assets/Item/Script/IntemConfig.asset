@@ -17,17 +17,17 @@ MonoBehaviour:
       level: 0
       denominations: 0
       manaRecovery: 0
-    name: 
-    amount: 0
-    maxAmount: 0
+    name: mana
+    amount: 1
+    maxAmount: 5
   healFlaskConfigList:
   - heal:
       level: 0
       denominations: 0
       manaRecovery: 0
-    name: 
-    amount: 0
-    maxAmount: 0
+    name: hp
+    amount: 1
+    maxAmount: 5
   foodConfigList:
   - food:
       level: 1
@@ -61,6 +61,6 @@ MonoBehaviour:
       damage: 0
       level: 0
       denominations: 0
-    name: 
-    amount: 0
-    maxAmount: 0
+    name: sword
+    amount: 1
+    maxAmount: 3

@@ -36,14 +36,14 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Inventory\Script\Slot.cs" />
      <Compile Include="Assets\Item\Script\ItemConfig.cs" />
      <Compile Include="Assets\Inventory\Script\ThrowZone.cs" />
-     <Compile Include="Assets\AddressableManager.cs" />
-     <Compile Include="Assets\Item\Script\Item.cs" />
-     <Compile Include="Assets\Inventory\Script\Slot.cs" />
      <Compile Include="Assets\Inventory\Script\InventoryItem.cs" />
-     <Compile Include="Assets\Inventory\Script\Inventory.cs" />
      <Compile Include="Assets\Inventory\Script\UIButton.cs" />
+     <Compile Include="Assets\AddressableManager.cs" />
+     <Compile Include="Assets\Inventory\Script\Inventory.cs" />
+     <Compile Include="Assets\Item\Script\Item.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:\Program\2021.3.4f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
@@ -722,17 +722,17 @@
     <Reference Include="UnityEditor.UI">
         <HintPath>D:\Unity Project\InventoryUnityTest\LaiTest\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Rider.Editor">
-        <HintPath>D:\Unity Project\InventoryUnityTest\LaiTest\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.PlasticSCM.Editor">
         <HintPath>D:\Unity Project\InventoryUnityTest\LaiTest\Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.UI">
-        <HintPath>D:\Unity Project\InventoryUnityTest\LaiTest\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+    <Reference Include="Unity.Rider.Editor">
+        <HintPath>D:\Unity Project\InventoryUnityTest\LaiTest\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.InternalAPIEditorBridge.001">
         <HintPath>D:\Unity Project\InventoryUnityTest\LaiTest\Library\ScriptAssemblies\Unity.InternalAPIEditorBridge.001.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+        <HintPath>D:\Unity Project\InventoryUnityTest\LaiTest\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Services.Core">
         <HintPath>D:\Unity Project\InventoryUnityTest\LaiTest\Library\ScriptAssemblies\Unity.Services.Core.dll</HintPath>

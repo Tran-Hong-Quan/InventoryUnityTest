@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName ="ItemConfig",fileName ="Intem Config")]
+[CreateAssetMenu(menuName = "ItemConfig", fileName = "Intem Config")]
 public class ItemConfig : ScriptableObject
 {
     #region ConfigClass
@@ -11,8 +11,8 @@ public class ItemConfig : ScriptableObject
     {
         public ManaFlask mana;
         public string name;
-        public int amount=1;
-        public int maxAmount=10;
+        public int amount = 1;
+        public int maxAmount = 10;
     }
     [Serializable]
     public class HealFlaskConfig
@@ -69,9 +69,9 @@ public class ItemConfig : ScriptableObject
 
     #region Mana
     public ManaFlask GetManaFlaskConfig(string name)
-    { 
-        for (int i=0;i<manaRcoveryConfigList.Count;i++)
-            if(name==manaRcoveryConfigList[i].name)
+    {
+        for (int i = 0; i < manaRcoveryConfigList.Count; i++)
+            if (name == manaRcoveryConfigList[i].name)
                 return manaRcoveryConfigList[i].mana;
         return null;
     }
@@ -86,7 +86,7 @@ public class ItemConfig : ScriptableObject
                 item.maxAmount = manaRcoveryConfigList[i].maxAmount;
                 item.itemData = JsonUtility.ToJson(manaRcoveryConfigList[i].mana);
                 item.itemName = name;
-                item.slotId=-1;
+                item.slotId = -1;
                 return item;
             }
         return null;
@@ -113,7 +113,7 @@ public class ItemConfig : ScriptableObject
                 item.maxAmount = healFlaskConfigList[i].maxAmount;
                 item.itemData = JsonUtility.ToJson(healFlaskConfigList[i].heal);
                 item.itemName = name;
-                item.slotId=-1;
+                item.slotId = -1;
                 return item;
             }
         return null;
@@ -122,7 +122,7 @@ public class ItemConfig : ScriptableObject
     #endregion
 
     #region Food
- 
+
     public Food GetFoodConfig(string name)
     {
         for (int i = 0; i < foodConfigList.Count; i++)
@@ -141,7 +141,7 @@ public class ItemConfig : ScriptableObject
                 item.maxAmount = foodConfigList[i].maxAmount;
                 item.itemData = JsonUtility.ToJson(foodConfigList[i].food);
                 item.itemName = name;
-                item.slotId=-1;
+                item.slotId = -1;
                 return item;
             }
         return null;
@@ -164,16 +164,16 @@ public class ItemConfig : ScriptableObject
         for (int i = 0; i < gunConfigList.Count; i++)
             if (name == gunConfigList[i].name)
             {
-                Item item=new Item();
+                Item item = new Item();
                 item.amount = gunConfigList[i].amount;
                 item.maxAmount = gunConfigList[i].maxAmount;
                 item.itemData = JsonUtility.ToJson(gunConfigList[i].gun);
                 item.itemName = name;
-                item.slotId=-1;
+                item.slotId = -1;
                 return item;
-            }    
+            }
         return null;
-    }    
+    }
 
     #endregion
 
@@ -196,7 +196,7 @@ public class ItemConfig : ScriptableObject
                 item.maxAmount = bookConfigList[i].maxAmount;
                 item.itemData = JsonUtility.ToJson(bookConfigList[i].book);
                 item.itemName = name;
-                item.slotId=-1;
+                item.slotId = -1;
                 return item;
             }
         return null;
@@ -224,7 +224,7 @@ public class ItemConfig : ScriptableObject
                 item.maxAmount = swordConfigList[i].maxAmount;
                 item.itemData = JsonUtility.ToJson(swordConfigList[i].sword);
                 item.itemName = name;
-                item.slotId=-1;
+                item.slotId = -1;
                 return item;
             }
         return null;
@@ -240,7 +240,7 @@ public class ItemConfig : ScriptableObject
     /// <param name="item"></param>
     public Item GetItemConfig(Item item)
     {
-        switch(item.itemType)
+        switch (item.itemType)
         {
             case ItemType.Book:
                 item = GetBookItemConfig(item.itemName);
@@ -254,10 +254,13 @@ public class ItemConfig : ScriptableObject
             case ItemType.LifeFlask:
                 item = GetHPFlaskItemConfig(item.itemName);
                 return item;
+            case ItemType.Sword:
+                item = GetSwordItemConfig(item.itemName);
+                return item;
             default:
                 return null;
-        }    
-    }    
+        }
+    }
 
     /// <summary>
     /// Get Config data when item have only name
@@ -274,15 +277,18 @@ public class ItemConfig : ScriptableObject
                 item = GetGunItemConfig(item.itemName);
                 break;
             case ItemType.Food:
-                item= GetFoodItemConfig(item.itemName);
+                item = GetFoodItemConfig(item.itemName);
                 break;
             case ItemType.LifeFlask:
-                item=GetHPFlaskItemConfig(item.itemName);
+                item = GetHPFlaskItemConfig(item.itemName);
+                break;
+            case ItemType.Sword:
+                item = GetSwordItemConfig(item.itemName);
                 break;
             default:
                 break;
         }
-    }    
+    }
 }
 
 
