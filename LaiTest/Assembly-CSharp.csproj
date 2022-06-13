@@ -39,6 +39,7 @@
      <Compile Include="Assets\Inventory\Script\Slot.cs" />
      <Compile Include="Assets\Item\Script\ItemConfig.cs" />
      <Compile Include="Assets\Inventory\Script\ThrowZone.cs" />
+     <Compile Include="Assets\Shop\Script\Shop.cs" />
      <Compile Include="Assets\Inventory\Script\InventoryItem.cs" />
      <Compile Include="Assets\Inventory\Script\UIButton.cs" />
      <Compile Include="Assets\AddressableManager.cs" />
