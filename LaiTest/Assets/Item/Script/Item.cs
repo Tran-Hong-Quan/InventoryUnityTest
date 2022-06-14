@@ -7,6 +7,7 @@ public class Item
     public string itemData;
     public string itemName;
     public string itemInformation;
+    public int itemValue;
 
     //For inventory
     public int slotId;
@@ -51,7 +52,7 @@ public enum ItemType
 public class ConsumableItem
 {
     public int level;
-    public int denominations;
+    
 }
 
 [Serializable]
@@ -85,7 +86,6 @@ public class Weapon
     public int maxDurability;
     public int damage;
     public int level;
-    public int denominations;
 }
 
 [Serializable]

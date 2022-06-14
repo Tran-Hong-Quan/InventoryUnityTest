@@ -13,6 +13,7 @@ public class ItemConfig : ScriptableObject
         public string name;
         public int amount = 1;
         public int maxAmount = 10;
+        public int itemValue;
     }
     [Serializable]
     public class HealFlaskConfig
@@ -21,6 +22,7 @@ public class ItemConfig : ScriptableObject
         public string name;
         public int amount = 1;
         public int maxAmount = 10;
+        public int itemValue;
     }
     [Serializable]
     public class FoodConfig
@@ -29,6 +31,7 @@ public class ItemConfig : ScriptableObject
         public string name;
         public int amount = 1;
         public int maxAmount = 10;
+        public int itemValue;
     }
     [Serializable]
     public class GunConfig
@@ -37,6 +40,7 @@ public class ItemConfig : ScriptableObject
         public string name;
         public int amount = 1;
         public int maxAmount = 10;
+        public int itemValue;
     }
     [Serializable]
     public class BooKConfig
@@ -45,6 +49,7 @@ public class ItemConfig : ScriptableObject
         public string name;
         public int amount = 1;
         public int maxAmount = 10;
+        public int itemValue;
     }
     [Serializable]
     public class SwordConfig
@@ -53,6 +58,7 @@ public class ItemConfig : ScriptableObject
         public string name;
         public int amount = 1;
         public int maxAmount = 10;
+        public int itemValue;
     }
     #endregion ConfigClass
 
@@ -84,9 +90,11 @@ public class ItemConfig : ScriptableObject
                 Item item = new Item();
                 item.amount = manaRcoveryConfigList[i].amount;
                 item.maxAmount = manaRcoveryConfigList[i].maxAmount;
+                item.itemValue=manaRcoveryConfigList[i].itemValue;
                 item.itemData = JsonUtility.ToJson(manaRcoveryConfigList[i].mana);
                 item.itemName = name;
                 item.slotId = -1;
+                item.itemType=ItemType.ManaFlask;
                 return item;
             }
         return null;
@@ -111,9 +119,11 @@ public class ItemConfig : ScriptableObject
                 Item item = new Item();
                 item.amount = healFlaskConfigList[i].amount;
                 item.maxAmount = healFlaskConfigList[i].maxAmount;
+                item.itemValue=healFlaskConfigList[i].itemValue;
                 item.itemData = JsonUtility.ToJson(healFlaskConfigList[i].heal);
                 item.itemName = name;
                 item.slotId = -1;
+                item.itemType=ItemType.LifeFlask;
                 return item;
             }
         return null;
@@ -139,9 +149,11 @@ public class ItemConfig : ScriptableObject
                 Item item = new Item();
                 item.amount = foodConfigList[i].amount;
                 item.maxAmount = foodConfigList[i].maxAmount;
+                item.itemValue=foodConfigList[i].itemValue;
                 item.itemData = JsonUtility.ToJson(foodConfigList[i].food);
                 item.itemName = name;
                 item.slotId = -1;
+                item.itemType=ItemType.Food;
                 return item;
             }
         return null;
@@ -167,9 +179,11 @@ public class ItemConfig : ScriptableObject
                 Item item = new Item();
                 item.amount = gunConfigList[i].amount;
                 item.maxAmount = gunConfigList[i].maxAmount;
+                item.itemValue=gunConfigList[i].itemValue;
                 item.itemData = JsonUtility.ToJson(gunConfigList[i].gun);
                 item.itemName = name;
                 item.slotId = -1;
+                item.itemType=ItemType.Gun;
                 return item;
             }
         return null;
@@ -194,9 +208,11 @@ public class ItemConfig : ScriptableObject
                 Item item = new Item();
                 item.amount = bookConfigList[i].amount;
                 item.maxAmount = bookConfigList[i].maxAmount;
+                item.itemValue=bookConfigList[i].itemValue;
                 item.itemData = JsonUtility.ToJson(bookConfigList[i].book);
                 item.itemName = name;
                 item.slotId = -1;
+                item.itemType=ItemType.Book;
                 return item;
             }
         return null;
@@ -222,9 +238,11 @@ public class ItemConfig : ScriptableObject
                 Item item = new Item();
                 item.amount = swordConfigList[i].amount;
                 item.maxAmount = swordConfigList[i].maxAmount;
+                item.itemValue=swordConfigList[i].itemValue;
                 item.itemData = JsonUtility.ToJson(swordConfigList[i].sword);
                 item.itemName = name;
                 item.slotId = -1;
+                item.itemType=ItemType.Sword;
                 return item;
             }
         return null;

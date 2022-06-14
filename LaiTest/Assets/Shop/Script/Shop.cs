@@ -1,49 +1,139 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Shop : MonoBehaviour
 {
+    [SerializeField] private InputField inputField;
+    [SerializeField] private Image choosedImage;
+    [SerializeField] private List<Button> buttonList;
+    [SerializeField] private Text priceText;
+    private string choosedName = "sword";
     ItemConfig itemConfig;
+
     private void Start()
     {
         itemConfig = Inventory.instance.itemConfig;
+
+        for (int i = 0; i < buttonList.Count; i++)
+        {
+            int tempI = i;
+            buttonList[i].onClick.AddListener(() =>
+            {
+                ChooseItem(tempI);
+            });
+        }
+
     }
-    public void AddManaToInventory()
+    public void ChooseItem(int i)
     {
-        Item mana = new Item(ItemType.ManaFlask, "mana");
-        itemConfig.GetItemConfig(ref mana);
-        Inventory.instance.AddItemToInventory(mana);
+        choosedName = buttonList[i].GetComponent<Image>().sprite.name;
+        choosedImage.sprite = buttonList[i].GetComponent<Image>().sprite;
     }
-    public void AddBookToInventory()
+
+    public void BuyItem()
     {
-        Item book = new Item(ItemType.Book, "book");
-        book = itemConfig.GetItemConfig(book);
-        Inventory.instance.AddItemToInventory(book);
+        int amount = int.Parse(inputField.text);
+        switch (choosedName)
+        {
+            case "food":
+                AddFoodToInventory(amount);
+                break;
+            case "mana":
+                AddManaToInventory(amount);
+                break;
+            case "hp":
+                AddHPToInventory(amount);
+                break;
+            case "book":
+                AddBookToInventory(amount);
+                break;
+            case "sword":
+                AddSwordToInventory(amount);
+                break;
+            case "gun":
+                AddGunToInventory(amount);
+                break;
+        }
     }
-    public void AddGunToInventory()
+
+    public void OnChangePrice(string input)
     {
-        Item Gun = new Item(ItemType.Gun, "gun");
-        Gun = itemConfig.GetItemConfig(Gun);
-        Inventory.instance.AddItemToInventory(Gun);
+        int amount = int.Parse(input);
+        priceText.text=amount.ToString();
+        // switch (choosedName)
+        // {
+        //     case "food":
+        //         for (int i = 0; i < itemConfig.foodConfigList.Count; i++)
+        //             if (itemConfig.foodConfigList[i].name == "food")
+        //                 priceText.text = (amount * itemConfig.foodConfigList[i].itemValue * amount).ToString();
+        //         break;
+        // }
     }
-    public void AddSwordToInventory()
+    public void AddManaToInventory(int amount)
     {
-        Item sword = new Item(ItemType.Sword, "sword");
-        sword = itemConfig.GetItemConfig(sword);
-        Inventory.instance.AddItemToInventory(sword);
+        if (amount >= 1)
+        {
+            Item mana = new Item(ItemType.ManaFlask, "mana");
+            itemConfig.GetItemConfig(ref mana);
+            mana.amount = amount;
+            Inventory.instance.AddItemToInventory(mana);
+        }
     }
-    public void AddHPToInventory()
+    public void AddBookToInventory(int amount)
     {
-        Item hp = new Item(ItemType.LifeFlask, "hp");
-        hp = itemConfig.GetItemConfig(hp);
-        Inventory.instance.AddItemToInventory(hp);
+        if (amount >= 1)
+        {
+            Item book = new Item(ItemType.Book, "book");
+            book = itemConfig.GetItemConfig(book);
+            book.amount = amount;
+            Inventory.instance.AddItemToInventory(book);
+        }
+
     }
-    public void AddFoodToInventory()
+    public void AddGunToInventory(int amount)
     {
-        Item food = new Item(ItemType.Food, "food");
-        food = itemConfig.GetItemConfig(food);
-        Inventory.instance.AddItemToInventory(food);
+        if (amount >= 1)
+        {
+            Item Gun = new Item(ItemType.Gun, "gun");
+            Gun = itemConfig.GetItemConfig(Gun);
+            Gun.amount = amount;
+            Inventory.instance.AddItemToInventory(Gun);
+        }
+
     }
-    
+    public void AddSwordToInventory(int amount)
+    {
+        if (amount >= 1)
+        {
+            Item sword = new Item(ItemType.Sword, "sword");
+            sword = itemConfig.GetItemConfig(sword);
+            sword.amount = amount;
+            Inventory.instance.AddItemToInventory(sword);
+        }
+
+    }
+    public void AddHPToInventory(int amount)
+    {
+        if (amount >= 1)
+        {
+            Item hp = new Item(ItemType.LifeFlask, "hp");
+            hp = itemConfig.GetItemConfig(hp);
+            hp.amount = amount;
+            Inventory.instance.AddItemToInventory(hp);
+        }
+
+    }
+    public void AddFoodToInventory(int amount)
+    {
+        if (amount >= 1)
+        {
+            Item food = new Item(ItemType.Food, "food");
+            food = itemConfig.GetItemConfig(food);
+            food.amount = amount;
+            Inventory.instance.AddItemToInventory(food);
+        }
+    }
+
 }
