@@ -275,6 +275,9 @@ public class ItemConfig : ScriptableObject
             case ItemType.Sword:
                 item = GetSwordItemConfig(item.itemName);
                 return item;
+            case ItemType.ManaFlask:
+                item = GetManaFlaskItemConfig(item.itemName);
+                return item;
             default:
                 return null;
         }
@@ -302,6 +305,9 @@ public class ItemConfig : ScriptableObject
                 break;
             case ItemType.Sword:
                 item = GetSwordItemConfig(item.itemName);
+                break;
+            case ItemType.ManaFlask:
+                item=GetManaFlaskItemConfig(item.itemName);
                 break;
             default:
                 break;

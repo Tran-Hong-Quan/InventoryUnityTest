@@ -15,52 +15,66 @@ MonoBehaviour:
   manaRcoveryConfigList:
   - mana:
       level: 0
-      denominations: 0
       manaRecovery: 0
     name: mana
     amount: 1
     maxAmount: 5
+    itemValue: 0
+  - mana:
+      level: 0
+      manaRecovery: 0
+    name: mana
+    amount: 1
+    maxAmount: 5
+    itemValue: 0
   healFlaskConfigList:
   - heal:
       level: 0
-      denominations: 0
       manaRecovery: 0
     name: hp
     amount: 1
     maxAmount: 5
+    itemValue: 0
   foodConfigList:
   - food:
-      level: 1
-      denominations: 10
-      hungerFill: 1
+      level: 0
+      hungerFill: 0
     name: food
     amount: 1
-    maxAmount: 10
+    maxAmount: 20
+    itemValue: 0
   gunConfigList:
   - gun:
       durability: 0
       maxDurability: 0
       damage: 0
       level: 0
-      denominations: 0
       bullet: 0
       maxBullet: 0
     name: gun
     amount: 1
     maxAmount: 1
+    itemValue: 0
   bookConfigList:
+  - book:
+      data: 
+    name: 
+    amount: 0
+    maxAmount: 0
+    itemValue: 0
   - book:
       data: 
     name: book
     amount: 1
     maxAmount: 8
+    itemValue: 0
   swordConfigList:
   - sword:
       durability: 0
       maxDurability: 0
       damage: 0
       level: 0
-      denominations: 0
     name: sword
     amount: 1
-    maxAmount: 3
+    maxAmount: 1
+    itemValue: 0

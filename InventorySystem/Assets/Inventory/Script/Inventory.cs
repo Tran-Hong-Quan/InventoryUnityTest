@@ -41,6 +41,7 @@ public class Inventory : MonoBehaviour
         {
             Item book = new Item(ItemType.Book, "book");
             book = itemConfig.GetItemConfig(book);
+            book.amount = 5;
             AddItemToInventory(book);
 
             Item gun = new Item(ItemType.Gun, "gun");
@@ -61,8 +62,8 @@ public class Inventory : MonoBehaviour
             mana.amount = 3;
             AddItemToInventory(mana);
 
-            Item hp = new Item(ItemType.ManaFlask, "hp");
-            itemConfig.GetItemConfig(ref hp);
+            Item hp = new Item(ItemType.LifeFlask, "hp");
+            hp=itemConfig.GetItemConfig(hp);
             hp.amount = 3;
             AddItemToInventory(hp);
         }
@@ -80,7 +81,14 @@ public class Inventory : MonoBehaviour
             if (!slots[item.slotId].isFill)
             {
                 slots[item.slotId].isFill = true;
-                if (item.amount == item.maxAmount) slots[item.slotId].isFull = true;
+                if (item.amount >= item.maxAmount) slots[item.slotId].isFull = true;
+
+                if (item.amount > item.maxAmount)
+                {
+                    Item offsetItem = new Item(item.itemType, item.itemData, item.itemName, -1, item.maxAmount - item.amount,item.maxAmount);
+                    item.amount = item.maxAmount;
+                    AddItemToInventory(offsetItem);
+                }
 
                 InventoryItem tempInventoryItem = Instantiate(inventoryPrefab);
                 tempInventoryItem.SetData(inventoryCanvas, item);
@@ -118,14 +126,22 @@ public class Inventory : MonoBehaviour
                 {
                     item.slotId = i;
                     slots[i].isFill = true;
-                    if (item.amount == item.maxAmount) slots[item.slotId].isFull = true;
+                    if (item.amount >= item.maxAmount) slots[item.slotId].isFull = true;
 
+                    if (item.amount > item.maxAmount)
+                    {
+                        Item offsetItem = new Item(item.itemType, item.itemData, item.itemName, -1, item.amount - item.maxAmount,item.maxAmount);
+                        AddItemToInventory(offsetItem);
+                        item.amount = item.maxAmount;
+                    }
                     InventoryItem tempInventoryItem = Instantiate(inventoryPrefab);
                     tempInventoryItem.SetData(inventoryCanvas, item);
 
                     InventoryItemsArray[i] = tempInventoryItem;
                     InventoryData.Data[i] = item;
                     return true;
+
+
                 }
                 else if (!slots[i].isFull)
                 {
@@ -308,7 +324,7 @@ public class Inventory : MonoBehaviour
         draggedItem.locateSlotId = -1;
         draggedItemData.slotId = -1;
     }
-    public void SetDraggedItem(InventoryItem draggedItem, Item itemData) //This fuction called if you want drag a item outside the inventory
+    public void SetDraggedItemOutsideInventory(InventoryItem draggedItem, Item itemData) //This fuction called if you want drag a item outside the inventory
     {
         this.draggedItem = draggedItem;
         draggedItemData = itemData;

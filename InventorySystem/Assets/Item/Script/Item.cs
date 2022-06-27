@@ -16,13 +16,14 @@ public class Item
 
     public Item() { }
 
-    public Item(ItemType itemType, string itemData, string itemName, int slotId, int amount)
+    public Item(ItemType itemType, string itemData, string itemName, int slotId, int amount,int maxAmount)
     {
         this.itemType = itemType;
         this.itemData = itemData;
         this.itemName = itemName;
         this.slotId = slotId;
         this.amount = amount;
+        this.maxAmount = maxAmount;
     }
     public Item(ItemType itemType, string itemName)
     {
