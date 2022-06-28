@@ -350,7 +350,7 @@ public class Inventory : MonoBehaviour
             {
                 if (draggedItemData.amount + InventoryData.Data[slot.slotId].amount <= InventoryData.Data[slot.slotId].maxAmount)
                 {
-                    Debug.Log("Drop to unfull slot and sum of item amout is less or equal than max amount");
+                    //Debug.Log("Drop to unfull slot and sum of item amout is less or equal than max amount");
                     InventoryData.Data[slot.slotId].amount += draggedItemData.amount;
                     InventoryItemsArray[slot.slotId].amoutText.text = InventoryData.Data[slot.slotId].amount.ToString();
 
@@ -371,7 +371,7 @@ public class Inventory : MonoBehaviour
                     }
                     else if (!slots[lastSlotID].isFill)
                     {
-                        Debug.Log("Drop to unfull slot and sum of item amount is greater max amount and last slot is NOT FILLED");
+                        //Debug.Log("Drop to unfull slot and sum of item amount is greater max amount and last slot is NOT FILLED");
                         slots[lastSlotID].DropItem(draggedItem);
                         slot.isFull = true;
                         draggedItem.amoutText.text = draggedItemData.amount.ToString();
@@ -382,7 +382,7 @@ public class Inventory : MonoBehaviour
                     }
                     else if (!slots[lastSlotID].isFull)
                     {
-                        Debug.Log("Drop to unfull slot and sum of item amount is greater max amount and last slot is FILLED and UNFULL");
+                        //Debug.Log("Drop to unfull slot and sum of item amount is greater max amount and last slot is FILLED and UNFULL");
                         InventoryData.Data[lastSlotID].amount += draggedItemData.amount;
                         InventoryItemsArray[lastSlotID].amoutText.text = InventoryData.Data[lastSlotID].amount.ToString();
                         if (InventoryData.Data[lastSlotID].amount >= InventoryData.Data[lastSlotID].maxAmount) slots[lastSlotID].isFull = true;
@@ -399,14 +399,14 @@ public class Inventory : MonoBehaviour
             {
                 if (!slots[lastSlotID].isFill)
                 {
-                    Debug.Log("Drop to an unavailable slot and come back to EMPTY slot");
+                    //Debug.Log("Drop to an unavailable slot and come back to EMPTY slot");
                     slots[lastSlotID].DropItem(draggedItem);
                     InventoryData.Data[lastSlotID] = draggedItemData;
                     InventoryItemsArray[lastSlotID] = draggedItem;
                 }
                 else if (!slots[lastSlotID].isFull)
                 {
-                    Debug.Log("Drop to an unavailable slot and come back to LAST slot");
+                    //Debug.Log("Drop to an unavailable slot and come back to LAST slot");
                     InventoryData.Data[lastSlotID].amount += draggedItemData.amount;
                     InventoryItemsArray[lastSlotID].amoutText.text = InventoryData.Data[lastSlotID].amount.ToString();
                     if (InventoryData.Data[lastSlotID].amount >= InventoryData.Data[lastSlotID].maxAmount) slots[lastSlotID].isFull = true;

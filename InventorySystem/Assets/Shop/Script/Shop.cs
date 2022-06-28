@@ -34,34 +34,46 @@ public class Shop : MonoBehaviour
 
     public void BuyItem()
     {
-        int amount = int.Parse(inputField.text);
-        switch (choosedName)
-        {
-            case "food":
-                AddFoodToInventory(amount);
-                break;
-            case "mana":
-                AddManaToInventory(amount);
-                break;
-            case "hp":
-                AddHPToInventory(amount);
-                break;
-            case "book":
-                AddBookToInventory(amount);
-                break;
-            case "sword":
-                AddSwordToInventory(amount);
-                break;
-            case "gun":
-                AddGunToInventory(amount);
-                break;
-        }
+        int amount;
+        try { amount = int.Parse(inputField.text); }
+        catch { amount = 1;}
+
+        if (amount >= 1)
+            switch (choosedName)
+            {
+                case "food":
+                    AddFoodToInventory(amount);
+                    break;
+                case "mana":
+                    AddManaToInventory(amount);
+                    break;
+                case "hp":
+                    AddHPToInventory(amount);
+                    break;
+                case "book":
+                    AddBookToInventory(amount);
+                    break;
+                case "sword":
+                    AddSwordToInventory(amount);
+                    break;
+                case "gun":
+                    AddGunToInventory(amount);
+                    break;
+            }
     }
 
     public void OnChangePrice(string input)
     {
-        int amount = int.Parse(input);
-        priceText.text=amount.ToString();
+        int amount;
+        try
+        {
+            amount = int.Parse(inputField.text);
+        }
+        catch
+        {
+            amount = 1;
+        }
+        priceText.text = amount.ToString();
         // switch (choosedName)
         // {
         //     case "food":
@@ -73,67 +85,46 @@ public class Shop : MonoBehaviour
     }
     public void AddManaToInventory(int amount)
     {
-        if (amount >= 1)
-        {
-            Item mana = new Item(ItemType.ManaFlask, "mana");
-            itemConfig.GetItemConfig(ref mana);
-            mana.amount = amount;
-            Inventory.instance.AddItemToInventory(mana);
-        }
+        Item mana = new Item(ItemType.ManaFlask, "mana");
+        itemConfig.GetItemConfig(ref mana);
+        mana.amount = amount;
+        Inventory.instance.AddItemToInventory(mana);
     }
     public void AddBookToInventory(int amount)
     {
-        if (amount >= 1)
-        {
-            Item book = new Item(ItemType.Book, "book");
-            book = itemConfig.GetItemConfig(book);
-            book.amount = amount;
-            Inventory.instance.AddItemToInventory(book);
-        }
-
+        Item book = new Item(ItemType.Book, "book");
+        book = itemConfig.GetItemConfig(book);
+        book.amount = amount;
+        Inventory.instance.AddItemToInventory(book);
     }
     public void AddGunToInventory(int amount)
     {
-        if (amount >= 1)
-        {
-            Item Gun = new Item(ItemType.Gun, "gun");
-            Gun = itemConfig.GetItemConfig(Gun);
-            Gun.amount = amount;
-            Inventory.instance.AddItemToInventory(Gun);
-        }
-
+        Item Gun = new Item(ItemType.Gun, "gun");
+        Gun = itemConfig.GetItemConfig(Gun);
+        Gun.amount = amount;
+        Inventory.instance.AddItemToInventory(Gun);
     }
     public void AddSwordToInventory(int amount)
     {
-        if (amount >= 1)
-        {
-            Item sword = new Item(ItemType.Sword, "sword");
-            sword = itemConfig.GetItemConfig(sword);
-            sword.amount = amount;
-            Inventory.instance.AddItemToInventory(sword);
-        }
-
+        Item sword = new Item(ItemType.Sword, "sword");
+        sword = itemConfig.GetItemConfig(sword);
+        sword.amount = amount;
+        Inventory.instance.AddItemToInventory(sword);
     }
     public void AddHPToInventory(int amount)
     {
-        if (amount >= 1)
-        {
-            Item hp = new Item(ItemType.LifeFlask, "hp");
-            hp = itemConfig.GetItemConfig(hp);
-            hp.amount = amount;
-            Inventory.instance.AddItemToInventory(hp);
-        }
-
+        Item hp = new Item(ItemType.LifeFlask, "hp");
+        hp = itemConfig.GetItemConfig(hp);
+        hp.amount = amount;
+        Inventory.instance.AddItemToInventory(hp);
     }
     public void AddFoodToInventory(int amount)
     {
-        if (amount >= 1)
-        {
-            Item food = new Item(ItemType.Food, "food");
-            food = itemConfig.GetItemConfig(food);
-            food.amount = amount;
-            Inventory.instance.AddItemToInventory(food);
-        }
+
+        Item food = new Item(ItemType.Food, "food");
+        food = itemConfig.GetItemConfig(food);
+        food.amount = amount;
+        Inventory.instance.AddItemToInventory(food);
     }
 
 }
