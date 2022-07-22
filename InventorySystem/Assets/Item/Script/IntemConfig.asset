@@ -20,13 +20,6 @@ MonoBehaviour:
     amount: 1
     maxAmount: 5
     itemValue: 0
-  - mana:
-      level: 0
-      manaRecovery: 0
-    name: mana
-    amount: 1
-    maxAmount: 5
-    itemValue: 0
   healFlaskConfigList:
   - heal:
       level: 0
@@ -56,12 +49,6 @@ MonoBehaviour:
     maxAmount: 1
     itemValue: 0
   bookConfigList:
-  - book:
-      data: 
-    name: 
-    amount: 0
-    maxAmount: 0
-    itemValue: 0
   - book:
       data: 
     name: book
