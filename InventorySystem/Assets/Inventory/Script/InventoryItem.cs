@@ -99,7 +99,4 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
         if (item.amount > 1) amoutText.text = item.amount.ToString();
         image.sprite = Resources.Load<Sprite>($"Image/{item.itemName}");
     }
-
-
-
 }

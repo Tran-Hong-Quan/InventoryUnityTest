@@ -120,7 +120,6 @@ public class Shop : MonoBehaviour
     }
     public void AddFoodToInventory(int amount)
     {
-
         Item food = new Item(ItemType.Food, "food");
         food = itemConfig.GetItemConfig(food);
         food.amount = amount;
