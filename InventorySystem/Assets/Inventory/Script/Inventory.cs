@@ -417,9 +417,7 @@ public class Inventory : MonoBehaviour
 
         }
 
-        draggedItem = null;
-        draggedItemData = null;
-        lastSlotID = -1;
+        SetNullDraggedItem();
     }
 
     public void CombackToLastSlot()
