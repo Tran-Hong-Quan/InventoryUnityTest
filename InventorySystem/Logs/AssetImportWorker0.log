@@ -15,7 +15,7 @@ D:/Fork Git/InventoryUnityTest/InventorySystem
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-64133
+62552
 Successfully changed project path to: D:/Fork Git/InventoryUnityTest/InventorySystem
 D:/Fork Git/InventoryUnityTest/InventorySystem
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
@@ -47,7 +47,7 @@ D:/Fork Git/InventoryUnityTest/InventorySystem
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Refreshing native plugins compatible for Editor in 49.93 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 58.35 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2021.3.4f1 (cb45f9cae8b7)
 [Subsystems] Discovering subsystems at path D:/Programs/Unity Version/2021.3.4f1/Editor/Data/Resources/UnitySubsystems
@@ -58,100 +58,120 @@ Direct3D:
     Renderer: Intel(R) UHD Graphics 630 (ID=0x3e92)
     Vendor:   Intel
     VRAM:     8115 MB
-    Driver:   30.0.101.1340
+    Driver:   31.0.101.2111
 Initialize mono
 Mono path[0] = 'D:/Programs/Unity Version/2021.3.4f1/Editor/Data/Managed'
 Mono path[1] = 'D:/Programs/Unity Version/2021.3.4f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'D:/Programs/Unity Version/2021.3.4f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56336
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56184
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: D:/Programs/Unity Version/2021.3.4f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
 Register platform support module: D:/Programs/Unity Version/2021.3.4f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll
 Register platform support module: D:/Programs/Unity Version/2021.3.4f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.003620 seconds.
+Registered in 0.003635 seconds.
 Native extension for WindowsStandalone target not found
 [usbmuxd] Start listen thread
 [usbmuxd] Listen thread started
 Native extension for iOS target not found
 Native extension for Android target not found
-Refreshing native plugins compatible for Editor in 48.16 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 56.54 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  0.619 seconds
+- Completed reload, in  0.592 seconds
 Domain Reload Profiling:
-	ReloadAssembly (620ms)
-		BeginReloadAssembly (66ms)
+	ReloadAssembly (592ms)
+		BeginReloadAssembly (63ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (0ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
 			CreateAndSetChildDomain (1ms)
-		EndReloadAssembly (452ms)
-			LoadAssemblies (65ms)
+		EndReloadAssembly (431ms)
+			LoadAssemblies (62ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (112ms)
+			SetupTypeCache (105ms)
 			ReleaseScriptCaches (0ms)
-			RebuildScriptCaches (28ms)
-			SetupLoadedEditorAssemblies (264ms)
+			RebuildScriptCaches (27ms)
+			SetupLoadedEditorAssemblies (252ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (59ms)
+				InitializePlatformSupportModulesInManaged (57ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (48ms)
-				BeforeProcessingInitializeOnLoad (2ms)
-				ProcessInitializeOnLoadAttributes (103ms)
-				ProcessInitializeOnLoadMethodAttributes (52ms)
+				RefreshPlugins (57ms)
+				BeforeProcessingInitializeOnLoad (1ms)
+				ProcessInitializeOnLoadAttributes (93ms)
+				ProcessInitializeOnLoadMethodAttributes (44ms)
 				AfterProcessingInitializeOnLoad (0ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (0ms)
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.004027 seconds.
+Registered in 0.004545 seconds.
+Multiple ADB server instances found, the following ADB server instance have been terminated due to being run from another SDK. Process paths: 
+D:\Programs\Unity Version\2021.3.6f1\Editor\Data\PlaybackEngines\AndroidPlayer\SDK\platform-tools\adb.exe
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+UnityEditor.Android.AndroidDeploymentTargetsExtension:GetKnownTargets (UnityEditor.DeploymentTargets.IDeploymentTargetsMainThreadContext,UnityEditor.ProgressHandler)
+UnityEditor.Android.TargetScanWorker:DoScan (UnityEditor.DeploymentTargets.IDeploymentTargetsExtension,UnityEditor.DeploymentTargets.IDeploymentTargetsMainThreadContext,System.Threading.CancellationToken)
+UnityEditor.Android.TargetScanWorker/<>c__DisplayClass8_0:<Scan>b__0 ()
+System.Threading.Tasks.Task:InnerInvoke ()
+System.Threading.Tasks.Task:Execute ()
+System.Threading.Tasks.Task:ExecutionContextCallback (object)
+System.Threading.ExecutionContext:RunInternal (System.Threading.ExecutionContext,System.Threading.ContextCallback,object,bool)
+System.Threading.ExecutionContext:Run (System.Threading.ExecutionContext,System.Threading.ContextCallback,object,bool)
+System.Threading.Tasks.Task:ExecuteWithThreadLocal (System.Threading.Tasks.Task&)
+System.Threading.Tasks.Task:ExecuteEntry (bool)
+System.Threading.Tasks.Task:System.Threading.IThreadPoolWorkItem.ExecuteWorkItem ()
+System.Threading.ThreadPoolWorkQueue:Dispatch ()
+System.Threading._ThreadPoolWaitCallback:PerformWaitCallback ()
+
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
 Native extension for iOS target not found
 Native extension for Android target not found
-Refreshing native plugins compatible for Editor in 47.94 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 56.54 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.117 seconds
+- Completed reload, in  1.193 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1118ms)
-		BeginReloadAssembly (219ms)
+	ReloadAssembly (1194ms)
+		BeginReloadAssembly (203ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (6ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (129ms)
-		EndReloadAssembly (784ms)
-			LoadAssemblies (78ms)
+			CreateAndSetChildDomain (121ms)
+		EndReloadAssembly (887ms)
+			LoadAssemblies (74ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (202ms)
+			SetupTypeCache (225ms)
 			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (53ms)
-			SetupLoadedEditorAssemblies (402ms)
+			RebuildScriptCaches (54ms)
+			SetupLoadedEditorAssemblies (489ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (20ms)
+				InitializePlatformSupportModulesInManaged (21ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (48ms)
-				BeforeProcessingInitializeOnLoad (75ms)
-				ProcessInitializeOnLoadAttributes (213ms)
-				ProcessInitializeOnLoadMethodAttributes (43ms)
+				RefreshPlugins (57ms)
+				BeforeProcessingInitializeOnLoad (95ms)
+				ProcessInitializeOnLoadAttributes (230ms)
+				ProcessInitializeOnLoadMethodAttributes (83ms)
 				AfterProcessingInitializeOnLoad (3ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (6ms)
+			AwakeInstancesAfterBackupRestoration (5ms)
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.05 seconds
-Refreshing native plugins compatible for Editor in 0.58 ms, found 3 plugins.
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.04 seconds
+Refreshing native plugins compatible for Editor in 0.70 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 2484 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 34 unused Assets / (86.2 KB). Loaded Objects now: 2949.
-Memory consumption went from 111.9 MB to 111.8 MB.
-Total: 3.341000 ms (FindLiveObjects: 0.213600 ms CreateObjectMapping: 0.110000 ms MarkObjects: 2.931400 ms  DeleteObjects: 0.085200 ms)
+Unloading 3460 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 38 unused Assets / (371.6 KB). Loaded Objects now: 3928.
+Memory consumption went from 142.4 MB to 142.0 MB.
+Total: 4.846800 ms (FindLiveObjects: 0.287000 ms CreateObjectMapping: 0.185500 ms MarkObjects: 4.195300 ms  DeleteObjects: 0.177300 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
@@ -165,159 +185,103 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
 Received Import Request.
-  Time since last request: 1141261.934564 seconds.
-  path: Assets/Scenes/New Scene.unity
-  artifactKey: Guid(8da1efcc58c407140ae5db2ab0c02f9f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/New Scene.unity using Guid(8da1efcc58c407140ae5db2ab0c02f9f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '06bc381522d7d31ec4aecd8c819c3845') in 0.008114 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 28.856498 seconds.
-  path: Assets/Scenes/Inventory.unity
+  Time since last request: 69475.679843 seconds.
+  path: Assets/InventoryAndShopSystem/Scenes/Inventory.unity
   artifactKey: Guid(9fc0d4010bbf28b4594072e72b8655ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/Inventory.unity using Guid(9fc0d4010bbf28b4594072e72b8655ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1a7285e6a72452d4bc741a51ea0fd98a') in 0.072127 seconds 
+Start importing Assets/InventoryAndShopSystem/Scenes/Inventory.unity using Guid(9fc0d4010bbf28b4594072e72b8655ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8ef7cc5fc9e4ea4efe9273cc34772e2f') in 0.027939 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 56.927879 seconds.
-  path: Assets/Item/Script/ItemConfig.cs
-  artifactKey: Guid(b8d60e62ecf56ab48b342e05606acaab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Item/Script/ItemConfig.cs using Guid(b8d60e62ecf56ab48b342e05606acaab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '44650dc1b92e4af14ba1bc8142b3b38b') in 0.033968 seconds 
+  Time since last request: 73.248850 seconds.
+  path: Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModulePhysics2D.cs
+  artifactKey: Guid(230fe34542e175245ba74b4659dae700) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModulePhysics2D.cs using Guid(230fe34542e175245ba74b4659dae700) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c384d553171ea419d9144fcd1e1ce1d9') in 0.029457 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.168303 seconds.
-  path: Assets/Shop
-  artifactKey: Guid(4561535b3d33a1148b82c52965967cf4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Shop using Guid(4561535b3d33a1148b82c52965967cf4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '134894c336766c146aedc5a4c0980085') in 0.008214 seconds 
+  Time since last request: 0.152605 seconds.
+  path: Assets/ExtendedAnimation/SwingEffect.cs
+  artifactKey: Guid(b72621088abee5045a88922c2ef1fe16) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExtendedAnimation/SwingEffect.cs using Guid(b72621088abee5045a88922c2ef1fe16) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd86af33314baaf665fc5aff4e43dc4cd') in 0.006879 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.136741 seconds.
-  path: Assets/Inventory/Image/Yellow/ButtonsSmall [Disabled]
-  artifactKey: Guid(918d9ace9fed7d748a725fa69f2dcd42) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Inventory/Image/Yellow/ButtonsSmall [Disabled] using Guid(918d9ace9fed7d748a725fa69f2dcd42) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bae8439e407122237c49a158e9c092da') in 0.008954 seconds 
+  Time since last request: 0.330999 seconds.
+  path: Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleAudio.cs
+  artifactKey: Guid(b766d08851589514b97afb23c6f30a70) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleAudio.cs using Guid(b766d08851589514b97afb23c6f30a70) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3c3587d0fa61227a25cf373df8c67aec') in 0.004741 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 1.654523 seconds.
-  path: Assets/Inventory/Script/UIButton.cs
-  artifactKey: Guid(ea30ac446e6c0714995f3e4ece1986c3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Inventory/Script/UIButton.cs using Guid(ea30ac446e6c0714995f3e4ece1986c3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1770263c33213e9d9522104c9c1e6b26') in 0.004239 seconds 
+  Time since last request: 0.731840 seconds.
+  path: Assets/ExtendedAnimation/UIAnimationButton.cs
+  artifactKey: Guid(5f3a3e56c4205a141841a13c1e9dafeb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExtendedAnimation/UIAnimationButton.cs using Guid(5f3a3e56c4205a141841a13c1e9dafeb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a1fb8a7874b674464db48838dc8372a6') in 0.007665 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.330933 seconds.
-  path: Assets/Inventory/Script/Slot.cs
-  artifactKey: Guid(8125d035122120445a910eb5e1ee05b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Inventory/Script/Slot.cs using Guid(8125d035122120445a910eb5e1ee05b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1f72120f78f9f9878322b51251248ed7') in 0.004636 seconds 
+  Time since last request: 0.672045 seconds.
+  path: Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleUtils.cs
+  artifactKey: Guid(7bcaf917d9cf5b84090421a5a2abe42e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleUtils.cs using Guid(7bcaf917d9cf5b84090421a5a2abe42e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1abcfea3e300c48dbe751e3119844713') in 0.009433 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 1.166567 seconds.
-  path: Assets/Item/Script/Item.cs
-  artifactKey: Guid(f599e4753fda5c24d8ace689f80ec069) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Item/Script/Item.cs using Guid(f599e4753fda5c24d8ace689f80ec069) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c799fd7f6a9d988e699c8bfbbfa97634') in 0.004712 seconds 
+  Time since last request: 1.216996 seconds.
+  path: Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleUI.cs
+  artifactKey: Guid(a060394c03331a64392db53a10e7f2d1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleUI.cs using Guid(a060394c03331a64392db53a10e7f2d1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7b027e38e0bc0465bd4d7505af07f18e') in 0.004414 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.485540 seconds.
-  path: Assets/Shop/Image
-  artifactKey: Guid(20faf5c995935b14cbe06cd3a0701eb8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Shop/Image using Guid(20faf5c995935b14cbe06cd3a0701eb8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a9656c0978059f32a1ae47730764a7d1') in 0.003963 seconds 
+  Time since last request: 1.709500 seconds.
+  path: Assets/ExtendedAnimation/UIAnimation.cs
+  artifactKey: Guid(f5b9431452c17eb4996e9b6cfe81041a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExtendedAnimation/UIAnimation.cs using Guid(f5b9431452c17eb4996e9b6cfe81041a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd79d305087e983dce8b6aa89d6d7dae5') in 0.030689 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 1.643773 seconds.
-  path: Assets/Shop/Script
-  artifactKey: Guid(7cc2e6728f32c22458a0dd51871de5e3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Shop/Script using Guid(7cc2e6728f32c22458a0dd51871de5e3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dd932dea618647d1d5343e17fbe80d17') in 0.004455 seconds 
+  Time since last request: 1.748266 seconds.
+  path: Assets/Plugins/Demigiant/DOTween/DOTween.dll
+  artifactKey: Guid(a811bde74b26b53498b4f6d872b09b6d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/Demigiant/DOTween/DOTween.dll using Guid(a811bde74b26b53498b4f6d872b09b6d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dba5887154ff15273ef2365debe9b0b2') in 0.011551 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 1.079798 seconds.
-  path: Assets/Inventory/Image/Yellow/ButtonB_Small
-  artifactKey: Guid(4433a2bcca5334149809326c959dc42c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Inventory/Image/Yellow/ButtonB_Small using Guid(4433a2bcca5334149809326c959dc42c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e4802547c0d8302de03b6be702555ef9') in 0.004430 seconds 
+  Time since last request: 0.088789 seconds.
+  path: Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModulePhysics.cs
+  artifactKey: Guid(dae9aa560b4242648a3affa2bfabc365) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModulePhysics.cs using Guid(dae9aa560b4242648a3affa2bfabc365) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1f9471607b0cf6717a51822e13a1353a') in 0.004252 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.331197 seconds.
-  path: Assets/Inventory/Script/Inventory.cs
+  Time since last request: 1.493318 seconds.
+  path: Assets/ExtendedAnimation/VibarationEffect.cs
+  artifactKey: Guid(9985c0e7d541eb04787c6464740a438f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExtendedAnimation/VibarationEffect.cs using Guid(9985c0e7d541eb04787c6464740a438f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1d7cae3953e788ad8d401078a330f30c') in 0.004125 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 3.361175 seconds.
+  path: Assets/ExtendedAnimation/UIAnimationParent.cs
+  artifactKey: Guid(3316876c8b7a05a46b4dfecaa7585703) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExtendedAnimation/UIAnimationParent.cs using Guid(3316876c8b7a05a46b4dfecaa7585703) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '623a1f3e2c0556552a048da3b4d51f63') in 0.017228 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.127332 seconds.
+  path: Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleUnityVersion.cs
+  artifactKey: Guid(63c02322328255542995bd02b47b0457) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleUnityVersion.cs using Guid(63c02322328255542995bd02b47b0457) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0bcd04f637ec25b160d69abd0d509ac5') in 0.004155 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.307394 seconds.
+  path: Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleEPOOutline.cs
+  artifactKey: Guid(e944529dcaee98f4e9498d80e541d93e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleEPOOutline.cs using Guid(e944529dcaee98f4e9498d80e541d93e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8962b8397440fa177d94ee6871ee3775') in 0.007223 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.473442 seconds.
+  path: Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleSprite.cs
+  artifactKey: Guid(188918ab119d93148aa0de59ccf5286b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleSprite.cs using Guid(188918ab119d93148aa0de59ccf5286b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4dd091bd7612f0498484c1ba7371db3a') in 0.004408 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.026405 seconds.
+  path: Assets/InventoryAndShopSystem/Inventory/Script/Inventory.cs
   artifactKey: Guid(fddb28b7bfb1b444187ad2d7c4a9a176) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Inventory/Script/Inventory.cs using Guid(fddb28b7bfb1b444187ad2d7c4a9a176) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7c94b59c168bff3da33b62525d5e1f12') in 0.007279 seconds 
+Start importing Assets/InventoryAndShopSystem/Inventory/Script/Inventory.cs using Guid(fddb28b7bfb1b444187ad2d7c4a9a176) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '35d413bf8d3d955237eff63fedbcd1b6') in 0.004218 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.550437 seconds.
-  path: Assets/Inventory/Script/InventoryItem.cs
-  artifactKey: Guid(9b38f6e3065e8aa46973771f563bd9c8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Inventory/Script/InventoryItem.cs using Guid(9b38f6e3065e8aa46973771f563bd9c8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ffc2104577fe6f023d8a84d6d270edb6') in 0.004096 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.044937 seconds.
-  path: Assets/Inventory/Script/ThrowZone.cs
-  artifactKey: Guid(bfb54a31a85cd6e4ca0a2576adf297e9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Inventory/Script/ThrowZone.cs using Guid(bfb54a31a85cd6e4ca0a2576adf297e9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9c8835090750974188ccf9ed0fa08817') in 0.004848 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 21.997926 seconds.
-  path: Assets/New Folder
-  artifactKey: Guid(94bd0a4aea0286f49aeed9a0a02ad688) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/New Folder using Guid(94bd0a4aea0286f49aeed9a0a02ad688) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '644e90d9d6ad50d1cecafe1d7f4855c1') in 0.009199 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 20.099899 seconds.
-  path: Assets/AddressableManager.cs
-  artifactKey: Guid(c616fa476dba22f458d04979a25444ac) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/AddressableManager.cs using Guid(c616fa476dba22f458d04979a25444ac) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '25c5ce8c8f0ca369983cc2307000b5a9') in 0.005158 seconds 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.004189 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Native extension for iOS target not found
-Native extension for Android target not found
-Refreshing native plugins compatible for Editor in 0.51 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  0.919 seconds
-Domain Reload Profiling:
-	ReloadAssembly (919ms)
-		BeginReloadAssembly (121ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (7ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (36ms)
-		EndReloadAssembly (705ms)
-			LoadAssemblies (84ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (210ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (42ms)
-			SetupLoadedEditorAssemblies (324ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (27ms)
-				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (62ms)
-				ProcessInitializeOnLoadAttributes (192ms)
-				ProcessInitializeOnLoadMethodAttributes (39ms)
-				AfterProcessingInitializeOnLoad (3ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (9ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 1.46 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 2460 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 22 unused Assets / (53.3 KB). Loaded Objects now: 2951.
-Memory consumption went from 109.8 MB to 109.7 MB.
-Total: 3.107700 ms (FindLiveObjects: 0.188900 ms CreateObjectMapping: 0.095600 ms MarkObjects: 2.771800 ms  DeleteObjects: 0.050600 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Import Request.
-  Time since last request: 42.222164 seconds.
-  path: Assets/InventoryAndShopSysem
-  artifactKey: Guid(1f5a31dcec7134448b8ff432d21f0c27) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/InventoryAndShopSysem using Guid(1f5a31dcec7134448b8ff432d21f0c27) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '83ef47e95f85a3b20f38f64edecebda4') in 0.011796 seconds 
+  Time since last request: 0.043117 seconds.
+  path: Assets/Plugins/Demigiant/DOTween/Editor/DOTweenEditor.dll
+  artifactKey: Guid(45d5034162d6cf04dbe46da84fc7d074) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/Demigiant/DOTween/Editor/DOTweenEditor.dll using Guid(45d5034162d6cf04dbe46da84fc7d074) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2cda2c71538acd38742e3b0c243da0a0') in 0.005322 seconds 
